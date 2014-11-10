@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Lesson-3</string>
+    <string name="title">Registration form</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="spinner_entry">
+        <item>One day</item>
+        <item>Two days</item>
+        <item>Three days</item>
+        <item>Four or more days</item>
+    </string-array>
+    <string name="spinner_name">Enter the number of days</string>
+    <string name="editText2">Address</string>
+    <string name="editText3">Telephone</string>
+    <string name="editText4">Email</string>
+
+    <string name="editText">Name</string>
+
+    <string name="radioButton">Single room</string>
+    <string name="radioButton2">Twin room</string>
+    <string name="checkBox">With breakfast ?</string>
+
+    <string name="toggleButtonOn">Smoker</string>
+    <string name="toggleButtonOff">Non-smoker</string>
+
+    <string name="button">Submit form</string>
+    <string name="button2">Clear form</string>
+    <string name="buttonExit">X</string>
+
+</resources>

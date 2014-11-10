@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Cviceni-3</string>
+    <string name="title">Registrační formulář</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="spinner_entry">
+        <item>Jeden den</item>
+        <item>Dva dny</item>
+        <item>Tři dny</item>
+        <item>Čtyři a více dnů</item>
+    </string-array>
+    <string name="editText">Jméno</string>
+    <string name="editText2">Adresa</string>
+    <string name="editText3">Telefon</string>
+    <string name="editText4">Email</string>
+
+    <string name="spinner_name">Zadejte pocet dni</string>
+
+    <string name="radioButton">Jednopokojový</string>
+    <string name="radioButton2">Dvoupokojový</string>
+    <string name="checkBox">Se snídaní?</string>
+
+    <string name="toggleButtonOn">Kuřák</string>
+    <string name="toggleButtonOff">Nekuřák</string>
+
+    <string name="button">Odeslat formulář</string>
+    <string name="button2">Vymazat formulář</string>
+    <string name="buttonExit">X</string>
+
+</resources>
