@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Odhlasujto</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="CreatePoll">Create poll</string>
+    <string name="Vote">Vote</string>
+    <string name="Results">View results</string>
 
 </resources>
