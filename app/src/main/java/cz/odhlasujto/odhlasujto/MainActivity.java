@@ -3,17 +3,27 @@ package cz.odhlasujto.odhlasujto;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.ClipData;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
 
+import android.view.View.OnClickListener;
 
+// Sherlock ActionBars lib if needed
+// import com.actionbarsherlock.view.MenuItem;
+//import com.actionbarsherlock.app.SherlockActivity;
+//import com.actionbarsherlock.view.MenuInflater;
 
 public class MainActivity extends Activity {
+
+    private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOG msgs
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +35,6 @@ public class MainActivity extends Activity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,11 +48,17 @@ public class MainActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Log.d(LOG, "Clicked on Settings");
+                return true;
+            case R.id.action_exit:
+                finish();
+                System.exit(0);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
