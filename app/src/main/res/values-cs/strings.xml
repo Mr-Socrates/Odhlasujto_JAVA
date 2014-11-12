@@ -8,7 +8,7 @@
     <string name="Results">Výsledky hlasování</string>
     <string name="Vote">Hlasuj</string>
     <string name="aboutLabel">Questa applicazione é stata sviluppata come progetto semestrale.\nE \'semplice strumento di voto.</string>
-    <string name="aboutLabel2">Maggiori informazioni sul nostro wiki:</string>
+    <string name="aboutLabe2">Maggiori informazioni sul nostro wiki:</string>
     <string name="aboutLink">https://bitbucket.org/Dan_Silhavy/mobiln-app-odhlasujto-java/wiki/Home</string>
 
 </resources>

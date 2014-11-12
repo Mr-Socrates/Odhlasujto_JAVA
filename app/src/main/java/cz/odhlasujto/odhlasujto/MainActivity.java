@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +21,7 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 // Sherlock ActionBars lib if needed
 // import com.actionbarsherlock.view.MenuItem;
@@ -83,4 +88,24 @@ public class MainActivity extends Activity {
             return rootView;
         }
     }
+
+    /**
+     * Sets a hyperlink style to the textview.
+     */
+    public static void makeTextViewHyperlink(TextView tv) {
+        SpannableStringBuilder ssb = new SpannableStringBuilder();
+        ssb.append(tv.getText());
+        ssb.setSpan(new URLSpan("#"), 0, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tv.setText(ssb, TextView.BufferType.SPANNABLE);
+    }
+
+    /*TextView tv = (TextView) findViewById(R.id.aboutLink);
+    Utils.makeTextViewHyperlink(tv);
+    tv.setOnClickListener(new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), RecipeActivity.class);
+            startActivity(intent);
+        }
+    });*/
 }
