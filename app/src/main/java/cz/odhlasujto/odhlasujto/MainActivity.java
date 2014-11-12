@@ -15,6 +15,8 @@ import android.os.Build;
 import android.widget.Button;
 
 import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 // Sherlock ActionBars lib if needed
 // import com.actionbarsherlock.view.MenuItem;
@@ -49,8 +51,13 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                Log.d(LOG, "Clicked on Settings");
+            case R.id.action_about:
+                Log.d(LOG, "Clicked on About");
+                FrameLayout activityMainLayout = (FrameLayout)findViewById(R.id.container);
+                activityMainLayout.removeAllViews();
+
+                LayoutInflater inflater = getLayoutInflater();
+                activityMainLayout.addView(inflater.inflate(R.layout.about_application, null));
                 return true;
             case R.id.action_exit:
                 finish();

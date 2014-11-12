@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Odhlasujto</string>
-    <string name="action_settings">Nastavení</string>
+    <string name="action_about">O aplikaci</string>
     <string name="action_exit">Exit</string>
 
     <string name="CreatePoll">Vytvoř hlasování</string>
     <string name="Results">Výsledky hlasování</string>
     <string name="Vote">Hlasuj</string>
+    <string name="aboutLabel">Questa applicazione é stata sviluppata come progetto semestrale.\nE \'semplice strumento di voto.</string>
+    <string name="aboutLabel2">Maggiori informazioni sul nostro wiki:</string>
+    <string name="aboutLink">https://bitbucket.org/Dan_Silhavy/mobiln-app-odhlasujto-java/wiki/Home</string>
 
 </resources>

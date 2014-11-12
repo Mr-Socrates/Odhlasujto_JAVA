@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/about_application"
+    style="@style/Theme.Sherlock"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/aboutLabel"
+        android:id="@+id/textView1"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="italic"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/aboutLabel2"
+        android:id="@+id/textView2"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/aboutLink"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:autoLink="web" />
+</LinearLayout>
