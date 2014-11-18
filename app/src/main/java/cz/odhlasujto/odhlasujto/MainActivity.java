@@ -23,8 +23,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
 // Sherlock ActionBars lib if needed
-// import com.actionbarsherlock.view.MenuItem;
+//import com.actionbarsherlock.view.MenuItem;
 //import com.actionbarsherlock.app.SherlockActivity;
 //import com.actionbarsherlock.view.MenuInflater;
 
@@ -90,7 +93,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Sets a hyperlink style to the textview.
+     * Sets a hyperlink style to the textView.
      */
     public static void makeTextViewHyperlink(TextView tv) {
         SpannableStringBuilder ssb = new SpannableStringBuilder();
@@ -99,7 +102,8 @@ public class MainActivity extends Activity {
         tv.setText(ssb, TextView.BufferType.SPANNABLE);
     }
 
-    /*TextView tv = (TextView) findViewById(R.id.aboutLink);
+    /** Adding Hyperlinks to anykind of textViews
+    TextView tv = (TextView) findViewById(R.id.aboutLink);
     Utils.makeTextViewHyperlink(tv);
     tv.setOnClickListener(new OnClickListener() {
         @Override
@@ -108,4 +112,14 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }
     });*/
+
+//region HW BUTTONS
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d(LOG, "Pressed Back");
+    }
+
+//endregion
+
 }
