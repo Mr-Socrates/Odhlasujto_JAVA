@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Odhlasujto.iml" filepath="$PROJECT_DIR$/Odhlasujto.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraries/actionbarsherlock/actionbarsherlock.iml" filepath="$PROJECT_DIR$/libraries/actionbarsherlock/actionbarsherlock.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mobiln-app-odhlasujto-java.iml" filepath="$PROJECT_DIR$/mobiln-app-odhlasujto-java.iml" />
     </modules>
   </component>
 </project>

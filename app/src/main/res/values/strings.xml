@@ -10,5 +10,7 @@
     <string name="aboutLabel">Questa applicazione é stata sviluppata come progetto semestrale.\nE \'semplice strumento di voto.</string>
     <string name="aboutLabe2">Maggiori informazioni sul nostro wiki:</string>
     <string name="aboutLink">https://bitbucket.org/Dan_Silhavy/mobiln-app-odhlasujto-java/wiki/Home</string>
+    <string name="poll_name_hint">Poll name</string>
+    <string name="poll_desc_hint">Poll description</string>
 
 </resources>

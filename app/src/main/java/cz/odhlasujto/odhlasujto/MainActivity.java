@@ -3,6 +3,8 @@ package cz.odhlasujto.odhlasujto;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,9 +36,13 @@ import android.content.DialogInterface;
 public class MainActivity extends Activity {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOG msgs
+    Fragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
@@ -44,6 +50,21 @@ public class MainActivity extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+/*      tohle nevim proč nejde…
+        Button createPoll = (Button) findViewById(R.id.button);
+
+        createPoll.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fragment = new FragmentCreate();
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.commit();
+            }
+        });*/
+
     }
 
     @Override
