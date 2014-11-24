@@ -50,7 +50,9 @@ public class MainActivity extends Activity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-/*      tohle nevim proč nejde…
+
+        else {
+      //tohle nevim proč nejde…
         Button createPoll = (Button) findViewById(R.id.button);
 
         createPoll.setOnClickListener(new OnClickListener() {
@@ -63,8 +65,8 @@ public class MainActivity extends Activity {
                 fragmentTransaction.replace(R.id.container, fragment);
                 fragmentTransaction.commit();
             }
-        });*/
-
+        });
+        }
     }
 
     @Override
