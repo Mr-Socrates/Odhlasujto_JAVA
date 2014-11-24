@@ -51,9 +51,8 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-        else {
       //tohle nevim proč nejde…
-        Button createPoll = (Button) findViewById(R.id.button);
+/*        Button createPoll = (Button) findViewById(R.id.button);
 
         createPoll.setOnClickListener(new OnClickListener() {
             @Override
@@ -62,11 +61,10 @@ public class MainActivity extends Activity {
                 fragment = new FragmentCreate();
                 fragmentManager = getFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
             }
-        });
-        }
+        });*/
     }
 
     @Override
