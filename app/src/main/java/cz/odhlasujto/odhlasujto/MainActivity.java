@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ListActivity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,21 +13,27 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
+import java.util.ArrayList;
 
 // Sherlock ActionBars lib if needed
 //import com.actionbarsherlock.view.MenuItem;
@@ -40,6 +47,9 @@ public class MainActivity extends Activity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
+    ArrayList<String> list = new ArrayList<String>();
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,20 +61,24 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-      //tohle nevim proč nejde…
-/*        Button createPoll = (Button) findViewById(R.id.button);
+        //tohle nevim proč nejde…
+        Button createPoll = (Button) findViewById(R.id.button);
 
         createPoll.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+                activityMainLayout.removeAllViews();
                 fragment = new FragmentCreate();
                 fragmentManager = getFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
+
             }
-        });*/
+        });
+
     }
 
     @Override
@@ -82,7 +96,7 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_about:
                 Log.d(LOG, "Clicked on About");
-                FrameLayout activityMainLayout = (FrameLayout)findViewById(R.id.container);
+                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
                 activityMainLayout.removeAllViews();
 
                 LayoutInflater inflater = getLayoutInflater();
@@ -95,7 +109,25 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
     }
+/*
+    public void addOptions(View view) {
+
+        *//** Defining the ArrayAdapter to set items to ListView *//*
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+
+
+        *//** Defining a click event listener for the button "Add" *//*
+        EditText edit = (EditText) findViewById(R.id.txtItem);
+        list.add(edit.getText().toString());
+        edit.setText("");
+        adapter.notifyDataSetChanged();
+
+    }*/
+
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -107,7 +139,7 @@ public class MainActivity extends Activity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
@@ -123,16 +155,18 @@ public class MainActivity extends Activity {
         tv.setText(ssb, TextView.BufferType.SPANNABLE);
     }
 
-    /** Adding Hyperlinks to anykind of textViews
-    TextView tv = (TextView) findViewById(R.id.aboutLink);
-    Utils.makeTextViewHyperlink(tv);
-    tv.setOnClickListener(new OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), RecipeActivity.class);
-            startActivity(intent);
-        }
-    });*/
+    /**
+     * Adding Hyperlinks to anykind of textViews
+     * TextView tv = (TextView) findViewById(R.id.aboutLink);
+     * Utils.makeTextViewHyperlink(tv);
+     * tv.setOnClickListener(new OnClickListener() {
+     *
+     * @Override public void onClick(View v) {
+     * Intent intent = new Intent(getApplicationContext(), RecipeActivity.class);
+     * startActivity(intent);
+     * }
+     * });
+     */
 
 //region HW BUTTONS
     @Override
