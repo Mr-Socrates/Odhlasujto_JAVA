@@ -17,5 +17,6 @@
     <string name="voteName">Poll name:</string>
     <string name="voteDesc">Poll description:</string>
     <string name="vote">Vote</string>
+    <string name="submit_vote">Submit vote</string>
 
 </resources>
