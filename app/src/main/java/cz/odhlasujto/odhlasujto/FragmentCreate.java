@@ -66,7 +66,7 @@ public class FragmentCreate extends Fragment {
 
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                FrameLayout activityCreateLayout = (FrameLayout) view.findViewById(R.id.container);
+                FrameLayout activityCreateLayout = (FrameLayout) view.findViewById(R.id.v);
                 activityCreateLayout.removeAllViews();
                 View view = inflater.inflate(R.layout.vote, container, false);
             }

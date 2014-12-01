@@ -61,6 +61,8 @@
             android:layout_below="@+id/vote"
             android:layout_centerHorizontal="true" />
 
+
+
     </RelativeLayout>
 
 </FrameLayout>
