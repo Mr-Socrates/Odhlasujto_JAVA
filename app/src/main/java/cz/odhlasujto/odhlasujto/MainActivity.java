@@ -1,39 +1,24 @@
 package cz.odhlasujto.odhlasujto;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListActivity;
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-
-import java.util.ArrayList;
 
 // Sherlock ActionBars lib if needed
 //import com.actionbarsherlock.view.MenuItem;
@@ -59,7 +44,9 @@ public class MainActivity extends Activity {
         }
 
 
-        Button createPoll = (Button) findViewById(R.id.button);
+        Button createPoll = (Button) findViewById(R.id.create);
+        Button vote = (Button) findViewById(R.id.vote);
+        Button results = (Button) findViewById(R.id.results);
 
         createPoll.setOnClickListener(new OnClickListener() {
             @Override
@@ -72,7 +59,41 @@ public class MainActivity extends Activity {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
-                Log.d(LOG, "Clicked on About");
+                //Log.d(LOG, "Clicked on About");
+
+            }
+        });
+
+
+        vote.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+                activityMainLayout.removeAllViews();
+                fragment = new FragmentVote();
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.container, fragment);
+                fragmentTransaction.commit();
+                //Log.d(LOG, "Clicked on About");
+
+            }
+        });
+
+
+        results.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+                activityMainLayout.removeAllViews();
+                fragment = new FragmentResults();
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.container, fragment);
+                fragmentTransaction.commit();
+                //Log.d(LOG, "Clicked on About");
 
             }
         });
@@ -123,7 +144,6 @@ public class MainActivity extends Activity {
         adapter.notifyDataSetChanged();
 
     }*/
-
 
 
     /**

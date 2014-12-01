@@ -14,5 +14,8 @@
     <string name="poll_desc_hint">Poll description</string>
     <string name="hintTxtItem">Enter an item here ...</string>
     <string name="lblBtnAdd">Add Item</string>
+    <string name="voteName">Poll name:</string>
+    <string name="voteDesc">Poll description:</string>
+    <string name="vote">Vote</string>
 
 </resources>
