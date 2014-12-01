@@ -16,6 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import android.net.wifi.WifiManager;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.Toast;
+import android.content.Context;
+
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -43,6 +49,18 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
+        Switch toggle = (Switch) findViewById(R.id.wifi_switch);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    toggleWiFi(true);
+                    Toast.makeText(getApplicationContext(), "Wi-Fi Enabled!", Toast.LENGTH_LONG).show();
+                } else {
+                    toggleWiFi(false);
+                    Toast.makeText(getApplicationContext(), "Wi-Fi Disabled!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         Button createPoll = (Button) findViewById(R.id.create);
         Button vote = (Button) findViewById(R.id.vote);
@@ -98,6 +116,17 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    public void toggleWiFi(boolean status) {
+        WifiManager wifiManager = (WifiManager) this
+                .getSystemService(Context.WIFI_SERVICE);
+        if (status == true && !wifiManager.isWifiEnabled()) {
+            wifiManager.setWifiEnabled(true);
+        } else if (status == false && wifiManager.isWifiEnabled()) {
+            wifiManager.setWifiEnabled(false);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
