@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/CreatePoll"
-            android:id="@+id/button"
+            android:id="@+id/create"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="94dp" />
@@ -49,16 +49,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Vote"
-            android:id="@+id/button2"
-            android:layout_below="@+id/button"
+            android:id="@+id/vote"
+            android:layout_below="@+id/create"
             android:layout_centerHorizontal="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Results"
-            android:id="@+id/button3"
-            android:layout_below="@+id/button2"
+            android:id="@+id/results"
+            android:layout_below="@+id/vote"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
