@@ -72,10 +72,10 @@ public class MainActivity extends Activity {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
+                Log.d(LOG, "Clicked on About");
 
             }
         });
-
     }
 
     @Override
