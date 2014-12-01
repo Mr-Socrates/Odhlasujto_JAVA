@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ import java.util.ArrayList;
 public class FragmentCreate extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.create_poll, container, false);
+        final View view =  inflater.inflate(R.layout.create_poll, container, false);
 
         final Button btn = (Button) view.findViewById(R.id.btnAdd);
 
@@ -34,8 +35,6 @@ public class FragmentCreate extends Fragment {
 
         final ArrayList<String> list = new ArrayList<String>();
         final ArrayAdapter<String> adapter;
-
-
 
 
 /*        public class ListAdapter extends ArrayAdapter {
@@ -62,6 +61,17 @@ public class FragmentCreate extends Fragment {
         });
 
         //setListAdapter(adapter);
+
+        final Button save = (Button) view.findViewById(R.id.savePollBtn);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FrameLayout activityCreateLayout = (FrameLayout) view.findViewById(R.id.container);
+                activityCreateLayout.removeAllViews();
+                View view = inflater.inflate(R.layout.vote, container, false);
+            }
+        });
+
 
         return view;
 
