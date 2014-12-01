@@ -7,23 +7,33 @@ package cz.odhlasujto.odhlasujto;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
-/** Note that here we are inheriting ListActivity class instead of Activity class **/
+/**
+ * Note that here we are inheriting ListActivity class instead of Activity class *
+ */
 public class CreatePoll extends ListActivity {
 
-    /** Items entered by the user is stored in this ArrayList variable */
+    /**
+     * Items entered by the user is stored in this ArrayList variable
+     */
     ArrayList<String> list = new ArrayList<String>();
 
-    /** Declaring an ArrayAdapter to set items to ListView */
+    /**
+     * Declaring an ArrayAdapter to set items to ListView
+     */
     ArrayAdapter<String> adapter;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +54,7 @@ public class CreatePoll extends ListActivity {
                 EditText edit = (EditText) findViewById(R.id.txtItem);
                 list.add(edit.getText().toString());
                 edit.setText("");
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetInvalidated();
             }
         };
 

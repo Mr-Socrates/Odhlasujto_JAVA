@@ -47,9 +47,6 @@ public class MainActivity extends Activity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
-    ArrayList<String> list = new ArrayList<String>();
-    ArrayAdapter<String> adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,7 +58,7 @@ public class MainActivity extends Activity {
                     .commit();
         }
 
-        //tohle nevim proč nejde…
+
         Button createPoll = (Button) findViewById(R.id.button);
 
         createPoll.setOnClickListener(new OnClickListener() {
