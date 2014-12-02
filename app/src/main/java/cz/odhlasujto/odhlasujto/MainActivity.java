@@ -26,6 +26,11 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+
+//import com.example.sharedpreferences.*;
+//import android.content.SharedPreferences;
+//import android.content.SharedPreferences.Editor;
+
 // Sherlock ActionBars lib if needed
 //import com.actionbarsherlock.view.MenuItem;
 //import com.actionbarsherlock.app.SherlockActivity;
@@ -62,6 +67,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        //region calling fragments
         Button createPoll = (Button) findViewById(R.id.create);
         Button vote = (Button) findViewById(R.id.vote);
         Button results = (Button) findViewById(R.id.results);
@@ -77,11 +83,9 @@ public class MainActivity extends Activity {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
-                //Log.d(LOG, "Clicked on About");
-
+                Log.d(LOG, "Clicked on CreatePoll Btn");
             }
         });
-
 
         vote.setOnClickListener(new OnClickListener() {
             @Override
@@ -94,11 +98,10 @@ public class MainActivity extends Activity {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
-                //Log.d(LOG, "Clicked on About");
+                Log.d(LOG, "Clicked on Vote Btn");
 
             }
         });
-
 
         results.setOnClickListener(new OnClickListener() {
             @Override
@@ -111,8 +114,7 @@ public class MainActivity extends Activity {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
-                //Log.d(LOG, "Clicked on About");
-
+                Log.d(LOG, "Clicked on Results Btn");
             }
         });
     }
@@ -213,6 +215,9 @@ public class MainActivity extends Activity {
      * }
      * });
      */
+//saving to preferences
+    public static final String MyPREFERENCES = "MyPrefs" ;
+//    TODO saving
 
 //region HW BUTTONS
     @Override

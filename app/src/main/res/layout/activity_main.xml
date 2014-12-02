@@ -61,6 +61,12 @@
             android:layout_below="@+id/vote"
             android:layout_centerHorizontal="true" />
 
+        <fragment
+            android:name="cz.odhlasujto.odhlasujto.FragmentCreate"
+            android:id="@+id/fragment_create_poll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            tools:layout="@layout/create_poll" />
 
 
     </RelativeLayout>

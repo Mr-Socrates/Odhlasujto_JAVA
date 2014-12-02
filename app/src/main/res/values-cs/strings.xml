@@ -7,8 +7,8 @@
     <string name="CreatePoll">Vytvoř hlasování</string>
     <string name="Results">Výsledky hlasování</string>
     <string name="Vote">Hlasuj</string>
-    <string name="aboutLabel">Questa applicazione é stata sviluppata come progetto semestrale.\nE \'semplice strumento di voto.</string>
-    <string name="aboutLabe2">Maggiori informazioni sul nostro wiki:</string>
+    <string name="aboutLabel">Tato aplikace byla vyvinuta jako semestrální projekt pro předmět Vývoj mobilních aplikací na PEF ČZU.\n Jedná se o hlasovací nástroj.</string>
+    <string name="aboutLabe2">Více informací najdete na naší wiki:</string>
     <string name="aboutLink">https://bitbucket.org/Dan_Silhavy/mobiln-app-odhlasujto-java/wiki/Home</string>
     <string name="poll_name_hint">Název ankety</string>
     <string name="poll_desc_hint">Popis ankety</string>
@@ -19,5 +19,8 @@
     <string name="vote">Hlasuj</string>
     <string name="submit_vote">Odešli hlasování</string>
     <string name="save_poll">Ulož hlasování</string>
+    <string name="btnBack">Zpět</string>
+    <string name="pollName">Poll name:</string>
+    <string name="option_name">Název možnosti</string>
 
 </resources>
