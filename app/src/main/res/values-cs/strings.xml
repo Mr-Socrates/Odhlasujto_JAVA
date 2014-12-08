@@ -22,5 +22,6 @@
     <string name="btnBack">Zpět</string>
     <string name="pollName">Poll name:</string>
     <string name="option_name">Název možnosti</string>
+    <string name="wifi_settings">Wi-Fi nastavení</string>
 
 </resources>

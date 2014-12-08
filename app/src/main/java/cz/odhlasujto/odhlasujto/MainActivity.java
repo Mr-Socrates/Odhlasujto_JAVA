@@ -38,7 +38,8 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOG msgs
+    private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
+
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -48,26 +49,13 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+//        if (savedInstanceState == null) {
+//            getFragmentManager().beginTransaction()
+//                    .add(R.id.container, new PlaceholderFragment())
+//                    .commit();
+//        }
 
-        Switch toggle = (Switch) findViewById(R.id.wifi_switch);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    toggleWiFi(true);
-                    Toast.makeText(getApplicationContext(), "Wi-Fi Enabled!", Toast.LENGTH_LONG).show();
-                } else {
-                    toggleWiFi(false);
-                    Toast.makeText(getApplicationContext(), "Wi-Fi Disabled!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        //region calling fragments
+ //region CALLING FRAGMENTS
         Button createPoll = (Button) findViewById(R.id.create);
         Button vote = (Button) findViewById(R.id.vote);
         Button results = (Button) findViewById(R.id.results);
@@ -76,11 +64,16 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
+                Log.d(LOG, "Clicked on CreatePoll Btn - 0 state");
                 FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+                Log.d(LOG, "Clicked on CreatePoll Btn - declaration");
                 activityMainLayout.removeAllViews();
+                Log.d(LOG, "Clicked on CreatePoll Btn - removeallViews");
                 fragment = new FragmentCreate();
+                Log.d(LOG, "Clicked on CreatePoll Btn - create Frag");
                 fragmentManager = getFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
+                Log.d(LOG, "Clicked on CreatePoll Btn - transaction");
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
                 Log.d(LOG, "Clicked on CreatePoll Btn");
@@ -90,7 +83,7 @@ public class MainActivity extends Activity {
         vote.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d(LOG, "Clicked on Vote Btn");
                 FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
                 activityMainLayout.removeAllViews();
                 fragment = new FragmentVote();
@@ -98,7 +91,6 @@ public class MainActivity extends Activity {
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
-                Log.d(LOG, "Clicked on Vote Btn");
 
             }
         });
@@ -116,9 +108,23 @@ public class MainActivity extends Activity {
                 fragmentTransaction.commit();
                 Log.d(LOG, "Clicked on Results Btn");
             }
-        });
-    }
+        });//endregion
 
+    //region Wi-Fi Switch
+        Switch toggle = (Switch) findViewById(R.id.wifi_switch);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    toggleWiFi(true);
+                    Toast.makeText(getApplicationContext(), "Wi-Fi Enabled!", Toast.LENGTH_LONG).show();
+                } else {
+                    toggleWiFi(false);
+                    Toast.makeText(getApplicationContext(), "Wi-Fi Disabled!", Toast.LENGTH_LONG).show();
+                }
+            }
+        });//endregion
+    }
+    //region Wi-Fi Service
     public void toggleWiFi(boolean status) {
         WifiManager wifiManager = (WifiManager) this
                 .getSystemService(Context.WIFI_SERVICE);
@@ -127,9 +133,9 @@ public class MainActivity extends Activity {
         } else if (status == false && wifiManager.isWifiEnabled()) {
             wifiManager.setWifiEnabled(false);
         }
-    }
+    }//endregion
 
-
+//region MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -158,15 +164,15 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
+//endregion
+
 /*
     public void addOptions(View view) {
 
         *//** Defining the ArrayAdapter to set items to ListView *//*
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-
 
         *//** Defining a click event listener for the button "Add" *//*
         EditText edit = (EditText) findViewById(R.id.txtItem);
@@ -176,7 +182,6 @@ public class MainActivity extends Activity {
 
     }*/
 
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -184,7 +189,6 @@ public class MainActivity extends Activity {
 
         public PlaceholderFragment() {
         }
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -193,6 +197,7 @@ public class MainActivity extends Activity {
         }
     }
 
+//region HYPERLINKS
     /**
      * Sets a hyperlink style to the textView.
      */
@@ -215,17 +220,31 @@ public class MainActivity extends Activity {
      * }
      * });
      */
-//saving to preferences
+//endregion
+
+//region SAVING PREFERENCES
     public static final String MyPREFERENCES = "MyPrefs" ;
 //    TODO saving
+//endregion
 
 //region HW BUTTONS
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Toast.makeText(MainActivity.this, "Haha! :-)", Toast.LENGTH_SHORT).show();
+        FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+        activityMainLayout.removeAllViews();
+
+        LayoutInflater inflater = getLayoutInflater();
+        activityMainLayout.addView(inflater.inflate(R.layout.activity_main, null));
+//                fragment = new PlaceholderFragment();
+//                fragmentManager = getFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.add(R.id.container, fragment);
+//                fragmentTransaction.commit();
+
+//        super.onBackPressed();
         Log.d(LOG, "Pressed Back");
     }
-
 //endregion
 
 }

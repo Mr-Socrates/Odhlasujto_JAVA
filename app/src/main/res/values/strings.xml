@@ -8,7 +8,7 @@
     <string name="Vote">Vote</string>
     <string name="Results">View results</string>
     <string name="aboutLabel">This application has been developed as a semestral project at FOEM CULS.\n It\'s simple voting tool.</string>
-    <string name="aboutLabe2">More information on our wiki:</string>
+    <string name="aboutLabe2">More information can be found on our wiki:</string>
     <string name="aboutLink">https://bitbucket.org/Dan_Silhavy/mobiln-app-odhlasujto-java/wiki/Home</string>
     <string name="poll_name_hint">Poll name</string>
     <string name="poll_desc_hint">Poll description</string>
@@ -22,4 +22,5 @@
     <string name="btnBack">Back</string>
     <string name="pollName">Poll name:</string>
     <string name="option_name">Option Name</string>
+    <string name="wifi_settings">Wi-Fi Settings</string>
 </resources>
