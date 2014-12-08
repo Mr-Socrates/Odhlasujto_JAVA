@@ -38,34 +38,6 @@ public class FragmentCreate extends SherlockFragment {
         final Button btnAddOption = (Button) view.findViewById(R.id.btnAdd);
         final EditText option = (EditText) view.findViewById(R.id.txtItem);
 
-        final ArrayList<String> list = new ArrayList<String>();
-        final ArrayAdapter<String> adapter;
-
-    //region ARRAY FOR SAVING ITEMS
-/*      public class ListAdapter extends ArrayAdapter {
-            public ArrayAdapter<String> adapter;
-            public ArrayList<String> list = new ArrayList<String>();
-
-            public ListAdapter(Context context, int textViewResourceId) {
-                super(context, textViewResourceId);
-            }
-
-            adapter = new ArrayAdapter<String>(FragmentCreate.this, android.R.layout.simple_list_item_1, list);
-        }*/
-        adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, list);
-//endregion
-
-    //region ADDING TextViews
-        btnAddOption.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                list.add(option.getText().toString());
-                option.setText("");
-                adapter.notifyDataSetChanged();
-            }
-        });
-        //setListAdapter(adapter);
-//endregion
-
     //region SUBMIT Poll
         final Button submitPoll = (Button) view.findViewById(R.id.savePollBtn);
         submitPoll.setOnClickListener(new View.OnClickListener() {
@@ -91,4 +63,30 @@ public class FragmentCreate extends SherlockFragment {
         return view;
 //endregion
     }
+    //region ARRAY FOR SAVING ITEMS
+/*    final ArrayList<String> list = new ArrayList<String>();
+    final ArrayAdapter<String> adapter;
+
+    public class ListAdapter extends ArrayAdapter {
+        public ArrayAdapter<String> adapter;
+        public ArrayList<String> list = new ArrayList<String>();
+
+        public ListAdapter(Context context, int textViewResourceId) {
+            super(context, textViewResourceId);
+        }
+    }
+    adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, list);
+//endregion
+
+    //region ADDING TextViews
+    @Override
+    btnAddOption.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+            list.add(option.getText().toString());
+            option.setText("");
+            adapter.notifyDataSetChanged();
+        }
+    });
+    //setListAdapter(adapter);*/
+//endregion
 }

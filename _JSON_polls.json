@@ -1,0 +1,34 @@
+{
+    "polls": [
+        {
+            "pollId": 1,
+            "pollName": "1.Hlasovani",
+            "pollDesc": "1.Desc",
+            "options": [
+                {
+                    "optionName": "1.moznost",
+                    "SUM": 1
+                },
+                {
+                    "optionName": "2Moznost",
+                    "SUM": 0
+                }
+            ]
+        },
+        {
+            "pollId": 2,
+            "pollName": "2.Hlasovani",
+            "pollDesc": "2.Desc",
+            "options": [
+                {
+                    "optionName": "3.moznost",
+                    "SUM": 0
+                },
+                {
+                    "optionName": "4.moznost",
+                    "SUM": 0
+                }
+            ]
+        }
+    ]
+}
