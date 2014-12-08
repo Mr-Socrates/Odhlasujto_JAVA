@@ -30,39 +30,15 @@
                  android:id="@+id/wifi_switch"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:layout_alignParentBottom="true"
-                 android:layout_marginBottom="10dp"
-                 android:background="@android:color/background_dark"
+                 android:layout_marginBottom="35dp"
                  android:checked="false"
                  android:text="@string/wifi_settings"
-                 android:textColor="@android:color/white"
+                 android:textColor="@android:color/black"
                  android:textOff="OFF"
-                 android:textOn="ON" />
-
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/CreatePoll"
-                 android:id="@+id/create"
-                 android:layout_alignParentTop="true"
-                 android:layout_centerHorizontal="true"
-                 android:layout_marginTop="94dp" />
-
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/Vote"
-                 android:id="@+id/vote"
-                 android:layout_below="@+id/create"
-                 android:layout_centerHorizontal="true" />
-
-             <Button
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/Results"
-                 android:id="@+id/results"
-                 android:layout_below="@+id/vote"
-                 android:layout_centerHorizontal="true" />
+                 android:textOn="ON"
+                 android:layout_alignParentBottom="true"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignParentEnd="true" />
 
          </RelativeLayout>
 

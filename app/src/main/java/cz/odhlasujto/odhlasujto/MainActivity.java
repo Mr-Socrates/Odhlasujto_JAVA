@@ -10,8 +10,8 @@ import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
+//import android.view.Menu;
+//import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,23 +26,31 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-
 //import com.example.sharedpreferences.*;
 //import android.content.SharedPreferences;
 //import android.content.SharedPreferences.Editor;
 
 // Sherlock ActionBars lib if needed
-//import com.actionbarsherlock.view.MenuItem;
-//import com.actionbarsherlock.app.SherlockActivity;
-//import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.ActionBar.TabListener;
+import com.actionbarsherlock.app.*;
 
-public class MainActivity extends Activity {
+public class MainActivity extends SherlockFragmentActivity implements TabListener{
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
 
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
+    ActionBar.Tab TabCreate,TabVote,TabResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +63,58 @@ public class MainActivity extends Activity {
 //                    .commit();
 //        }
 
- //region CALLING FRAGMENTS
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);    // Create Actionbar Tabs
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        //TODO REFACTORING
+        // Set Tab Icon and Titles
+        TabCreate = actionBar.newTab().setText("Create");
+        TabVote = actionBar.newTab().setText("Vote");
+        TabResults = actionBar.newTab().setText("Results");
+
+        // Set Tab Listeners
+        TabCreate.setTabListener(new SherlockTabListener<FragmentCreate>(R.id.container, this, "Create",
+                FragmentCreate.class));
+        TabVote.setTabListener(new SherlockTabListener<FragmentVote>(R.id.container, this, "Vote",
+                FragmentVote.class));
+        TabResults.setTabListener(new SherlockTabListener<FragmentResults>(R.id.container, this, "Results",
+                FragmentResults.class));
+
+        // Add tabs to actionbar
+        actionBar.addTab(TabCreate);
+        actionBar.addTab(TabVote);
+        actionBar.addTab(TabResults);
+        actionBar.selectTab(TabVote);
+
+/*        Tab tabCreate = actionBar
+                .newTab()
+                .setText("Create")
+                .setIcon(R.drawable.ic_launcher)
+                .setTabListener(
+                    new TabListener<TabFragment>(R.id., "tab1", TabFragment.class));
+                // tabRed.setTabListener(new TabListener<TabFragment>(this, "tab1", TabFragment.class));
+        actionBar.addTab(tabCreate);
+        actionBar.selectTab(tabCreate);
+
+        Tab tabVote = actionBar
+                .newTab()
+                .setText("Vote")
+                .setTabListener(this);
+                // tabBlue.setTabListener(new TabListener<TabFragment>(this, tabBlue, TabFragment.class));
+        actionBar.addTab(tabVote);
+
+        Tab tabResults = actionBar
+                .newTab()
+                .setText("Results")
+                .setTabListener(this);
+                // tabBlue.setTabListener(new TabListener<TabFragment>(this, tabBlue, TabFragment.class));
+        actionBar.addTab(tabResults);
+*/
+
+        //region CALLING FRAGMENTS
+        /*
         Button createPoll = (Button) findViewById(R.id.create);
         Button vote = (Button) findViewById(R.id.vote);
         Button results = (Button) findViewById(R.id.results);
@@ -64,19 +123,19 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Log.d(LOG, "Clicked on CreatePoll Btn - 0 state");
+                    Log.d(LOG, "Clicked on CreatePoll Btn - 0 state");
                 FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
-                Log.d(LOG, "Clicked on CreatePoll Btn - declaration");
+                    Log.d(LOG, "Clicked on CreatePoll Btn - declaration");
                 activityMainLayout.removeAllViews();
-                Log.d(LOG, "Clicked on CreatePoll Btn - removeallViews");
+                    Log.d(LOG, "Clicked on CreatePoll Btn - removeallViews");
                 fragment = new FragmentCreate();
-                Log.d(LOG, "Clicked on CreatePoll Btn - create Frag");
+                    Log.d(LOG, "Clicked on CreatePoll Btn - create Frag");
                 fragmentManager = getFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                Log.d(LOG, "Clicked on CreatePoll Btn - transaction");
+                    Log.d(LOG, "Clicked on CreatePoll Btn - transaction");
                 fragmentTransaction.add(R.id.container, fragment);
                 fragmentTransaction.commit();
-                Log.d(LOG, "Clicked on CreatePoll Btn");
+                    Log.d(LOG, "Clicked on CreatePoll Btn");
             }
         });
 
@@ -108,9 +167,11 @@ public class MainActivity extends Activity {
                 fragmentTransaction.commit();
                 Log.d(LOG, "Clicked on Results Btn");
             }
-        });//endregion
+        });
+        */
+//endregion
 
-    //region Wi-Fi Switch
+        //region Wi-Fi Switch
         Switch toggle = (Switch) findViewById(R.id.wifi_switch);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -135,8 +196,8 @@ public class MainActivity extends Activity {
         }
     }//endregion
 
-//region MENU
-    @Override
+    //region MENU
+  /*  @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -164,9 +225,21 @@ public class MainActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 //endregion
 
+    //region IMPLEMENTED SHERLOCK METHODS (possible refactoring https://github.com/codepath/android_guides/wiki/ActionBar-Tabs-with-Fragments )
+    @Override
+    public void onTabSelected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+    }
+    @Override
+    public void onTabUnselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+    }
+    @Override
+    public void onTabReselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+    }//endregion
+
+    //region Adding DATA TO ARRAYS
 /*
     public void addOptions(View view) {
 
@@ -181,12 +254,13 @@ public class MainActivity extends Activity {
         adapter.notifyDataSetChanged();
 
     }*/
+//endregion
 
+    //region PLACEHOLDER FRAGMENT
     /**
-     * A placeholder fragment containing a simple view.
+     * Contains simple views
      */
     public static class PlaceholderFragment extends Fragment {
-
         public PlaceholderFragment() {
         }
         @Override
@@ -196,8 +270,9 @@ public class MainActivity extends Activity {
             return rootView;
         }
     }
+//endregion
 
-//region HYPERLINKS
+    //region HYPERLINKS
     /**
      * Sets a hyperlink style to the textView.
      */
@@ -222,12 +297,12 @@ public class MainActivity extends Activity {
      */
 //endregion
 
-//region SAVING PREFERENCES
+    //region SAVING PREFERENCES
     public static final String MyPREFERENCES = "MyPrefs" ;
 //    TODO saving
 //endregion
 
-//region HW BUTTONS
+    //region HW BUTTONS
     @Override
     public void onBackPressed() {
         Toast.makeText(MainActivity.this, "Haha! :-)", Toast.LENGTH_SHORT).show();

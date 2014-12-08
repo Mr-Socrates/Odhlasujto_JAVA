@@ -17,7 +17,9 @@ import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.view.LayoutInflater;
 
-public class FragmentResults extends Fragment {
+import com.actionbarsherlock.app.SherlockFragment;
+
+public class FragmentResults extends SherlockFragment {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
 
@@ -26,18 +28,18 @@ public class FragmentResults extends Fragment {
 
         final View view = inflater.inflate(R.layout.results, container, false);
 
-        final Button btnBack = (Button) view.findViewById(R.id.btnBack);
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FrameLayout activityMainLayout = (FrameLayout) view.findViewById(R.id.container);
-//                activityMainLayout.removeAllViews();
-
-                LayoutInflater inflater = getActivity().getLayoutInflater();
-                activityMainLayout.addView(inflater.inflate(R.layout.activity_main, null));
-            }
-        });
+//        final Button btnBack = (Button) view.findViewById(R.id.btnBack);
+//
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FrameLayout activityMainLayout = (FrameLayout) view.findViewById(R.id.container);
+////                activityMainLayout.removeAllViews();
+//
+//                LayoutInflater inflater = getActivity().getLayoutInflater();
+//                activityMainLayout.addView(inflater.inflate(R.layout.activity_main, null));
+//            }
+//        });
         return view;
     }
 }

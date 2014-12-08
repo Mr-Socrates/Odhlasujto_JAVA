@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class FragmentVote extends Fragment {
+import com.actionbarsherlock.app.SherlockFragment;
+
+public class FragmentVote extends SherlockFragment {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
 
@@ -28,26 +30,26 @@ public class FragmentVote extends Fragment {
 
         final Button submitVote = (Button) view.findViewById(R.id.btnSubmitVote);
 
-        submitVote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
-                Log.d(LOG, "Clicked on Submit Poll: declaration");
-
-//                fragmentCreateLayout.removeAllViews();
-                Log.d(LOG, "Clicked on Submit Poll: remove all views");
-                fragment = new FragmentResults();
-                Log.d(LOG, "Clicked on Submit Poll: called fragment VOTE");
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                Log.d(LOG, "Clicked on Submit Poll: commited");
-//                View view = inflater.inflate(R.layout.vote, container, false);
-//                Log.d(LOG, "Clicked on Submit POLL Btn");
-            }
-        });
+//        submitVote.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
+//                Log.d(LOG, "Clicked on Submit Poll: declaration");
+//
+////                fragmentCreateLayout.removeAllViews();
+//                Log.d(LOG, "Clicked on Submit Poll: remove all views");
+//                fragment = new FragmentResults();
+//                Log.d(LOG, "Clicked on Submit Poll: called fragment VOTE");
+//                fragmentManager = getFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//                Log.d(LOG, "Clicked on Submit Poll: commited");
+////                View view = inflater.inflate(R.layout.vote, container, false);
+////                Log.d(LOG, "Clicked on Submit POLL Btn");
+//            }
+//        });
 
         return view;
     }

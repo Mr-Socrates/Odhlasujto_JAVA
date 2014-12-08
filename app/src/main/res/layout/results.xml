@@ -113,13 +113,4 @@
 
     </GridLayout>
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/btnBack"
-        android:layout_margin="20dp"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentBottom="true" />
-
 </RelativeLayout>
