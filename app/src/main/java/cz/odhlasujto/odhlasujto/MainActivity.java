@@ -25,19 +25,21 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 
-    import android.os.AsyncTask;
-    import org.json.JSONObject;
-    import org.json.JSONException;
-    import org.json.JSONArray;
-    import java.io.IOException;
-    import java.io.InputStream;
-    import java.net.HttpURLConnection;
-    import java.net.URL;
-    import java.io.InputStreamReader;
-    import java.io.Reader;
-    import java.util.ArrayList;
-    import java.util.Collections;
-    import java.util.Comparator;
+import android.os.AsyncTask;
+
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONArray;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.widget.Toast;
 import android.content.Context;
@@ -62,7 +64,7 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.*;
 
-public class MainActivity extends SherlockFragmentActivity implements TabListener{
+public class MainActivity extends SherlockFragmentActivity implements TabListener {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
     private static final String URL =
@@ -71,7 +73,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
-    ActionBar.Tab TabCreate,TabVote,TabResults;
+    ActionBar.Tab TabCreate, TabVote, TabResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,6 +192,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
             }
         });//endregion
     }
+
     //region Wi-Fi Service
     public void toggleWiFi(boolean status) {
         WifiManager wifiManager = (WifiManager) this
@@ -237,9 +240,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     @Override
     public void onTabSelected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }
+
     @Override
     public void onTabUnselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }
+
     @Override
     public void onTabReselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }//endregion
@@ -304,10 +309,10 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                 e.printStackTrace();
             }
         }
-   //region DB /\ SORTING
+        //region DB /\ SORTING
         db db = new db(this);
         // jelikož nám zbyli nejspíš studenti z minula
-        db.getWritableDatabase().delete("studenti",null,null);
+        db.getWritableDatabase().delete("studenti", null, null);
 
         db.insertPolls(data);
 
@@ -319,7 +324,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
         // setřídíme/vybereme setříděná data
         ArrayList<Poll> dataOrdered; //= new ArrayList<Student>(); --> pokud byste chtěli kolekci sami plnit (dataOrdered.add...)
-        if (!save) dataOrdered = order(data,by);
+        if (!save) dataOrdered = order(data, by);
         else {
             dataOrdered = db.getPolls(by);
         }
@@ -331,11 +336,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     }
 
     // SORTING
-    private ArrayList<Poll> order(ArrayList<Poll> data,final String by) {
+    private ArrayList<Poll> order(ArrayList<Poll> data, final String by) {
         Collections.sort(data, new Comparator<Poll>() {
             @Override
             public int compare(Poll s1, Poll s2) {
-    // TODO JEN NAMÁTKOU - SORT BUDE POTOM DLE SUMY A ID
+                // TODO JEN NAMÁTKOU - SORT BUDE POTOM DLE SUMY A ID
                 if (by.equals("pollDesc")) return s1.getPollDesc().compareTo(s2.getPollDesc());
                 else if (by.equals("pollName")) return s1.getPollName().compareTo(s2.getPollName());
                 else /*if (by.equals("id"))*/ return (s1.getPollId() - s2.getPollId());
@@ -379,12 +384,14 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //endregion
 
     //region PLACEHOLDER FRAGMENT
+
     /**
      * Contains simple views
      */
     public static class PlaceholderFragment extends Fragment {
         public PlaceholderFragment() {
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -395,6 +402,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //endregion
 
     //region HYPERLINKS
+
     /**
      * Sets a hyperlink style to the textView.
      */
@@ -420,7 +428,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //endregion
 
     //region SAVING PREFERENCES
-    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String MyPREFERENCES = "MyPrefs";
 //    TODO saving
 //endregion
 

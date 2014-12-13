@@ -1,5 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -31,14 +33,20 @@ public class FragmentCreate extends SherlockFragment {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
+    private ArrayList<Poll> newPollArrayL;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
-        final View view =  inflater.inflate(R.layout.create_poll, container, false);
+        final View view = inflater.inflate(R.layout.create_poll, container, false);
 
         final Button btnAddOption = (Button) view.findViewById(R.id.btnAdd);
         final EditText option = (EditText) view.findViewById(R.id.txtItem);
+        final EditText pollName = (EditText) view.findViewById(R.id.pollName);
+        final EditText pollDesc = (EditText) view.findViewById(R.id.pollDesc);
 
-    //region SUBMIT Poll
+        newPollArrayL = new ArrayList<Poll>();
+
+        //region SUBMIT Poll
         final Button submitPoll = (Button) view.findViewById(R.id.savePollBtn);
         submitPoll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,11 +66,40 @@ public class FragmentCreate extends SherlockFragment {
 //                Log.d(LOG, "Clicked on Submit Poll: commited");
 ////                View view = inflater.inflate(R.layout.vote, container, false);
 ////                Log.d(LOG, "Clicked on Submit POLL Btn");
+
+                //něco zkoušim dát do databáze
+                String ziskanePollName = pollName.getText().toString();
+                String ziskanePollDesc = pollDesc.getText().toString();
+
+                //předání do setterů
+                Poll newPoll = new Poll();
+                newPoll.setPollName(ziskanePollName);
+                newPoll.setPollDesc(ziskanePollDesc);
+
+                //dosazení do ArrayListu
+                newPollArrayL.add(newPoll);
+                db db = new db(getActivity().getApplicationContext());
+                db.insertPolls(newPollArrayL);
+
             }
         });
         return view;
-//endregion
     }
+
+//endregion
+
+        //region přidání položek
+
+//        public void insertPoll(Poll paraPoll){
+//        db newDB = new db(getActivity().getApplicationContext());
+//        SQLiteDatabase sqliteDatabase = newDB.getWritableDatabase();
+
+
+
+
+    }
+
+        //endregion
     //region ARRAY FOR SAVING ITEMS
 /*    final ArrayList<String> list = new ArrayList<String>();
     final ArrayAdapter<String> adapter;
@@ -89,4 +126,4 @@ public class FragmentCreate extends SherlockFragment {
     });
     //setListAdapter(adapter);*/
 //endregion
-}
+

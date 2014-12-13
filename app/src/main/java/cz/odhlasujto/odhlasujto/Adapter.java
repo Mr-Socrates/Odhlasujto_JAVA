@@ -53,19 +53,19 @@ public class Adapter extends BaseAdapter {
         View view = null;
 
         view = inflater.inflate(R.layout.rimmer, null);
-        TextView t0  = (TextView) view.findViewById(R.id.pollIdMUSTR);
+        TextView t0 = (TextView) view.findViewById(R.id.pollIdMUSTR);
         t0.setText(String.valueOf(data.get(i).getPollId()));
 
-        TextView t1  = (TextView) view.findViewById(R.id.pollNameMUSTR);
+        TextView t1 = (TextView) view.findViewById(R.id.pollNameMUSTR);
         t1.setText(data.get(i).getPollName());
 
-        TextView t2  = (TextView) view.findViewById(R.id.pollDescMUSTR);
+        TextView t2 = (TextView) view.findViewById(R.id.pollDescMUSTR);
         t2.setText(data.get(i).getPollDesc());
 
-        TextView t3  = (TextView) view.findViewById(R.id.optionNameMUSTR);
+        TextView t3 = (TextView) view.findViewById(R.id.optionNameMUSTR);
         t3.setText(data.get(i).getOptionName());
 
-        TextView t4  = (TextView) view.findViewById(R.id.SUMMUSTR);
+        TextView t4 = (TextView) view.findViewById(R.id.SUMMUSTR);
         t4.setText(data.get(i).getSUM());
 
         return view;
