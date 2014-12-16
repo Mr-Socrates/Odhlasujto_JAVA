@@ -117,10 +117,14 @@
         android:layout_height="200dp"
         android:id="@+id/listView"
         android:layout_gravity="center_horizontal"
-        android:background="#efefef"
+        android:background="#cccccc"
         android:gravity="bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        </ListView>
 
 </RelativeLayout>

@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.view.LayoutInflater;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
@@ -27,6 +28,17 @@ public class FragmentResults extends SherlockFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.results, container, false);
+
+        TextView textNAME = (TextView) view.findViewById(R.id.pollNameID);
+        TextView textDESC = (TextView) view.findViewById(R.id.pollDescID);
+
+        db db = new db(getActivity().getApplicationContext());
+        String dataName = db.getPollName();
+        String dataDesc = db.getPollDesc();
+        db.close();
+        textNAME.setText(dataName);
+        textDESC.setText(dataDesc);
+
 
 //        final Button btnBack = (Button) view.findViewById(R.id.btnBack);
 //

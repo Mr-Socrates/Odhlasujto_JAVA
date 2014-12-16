@@ -22,7 +22,7 @@ public class SherlockTabListener <T extends SherlockFragment> implements TabList
         mActivity = activity;
         mTag = tag;
         mClass = clz;
-        mfragmentContainerId = android.R.id.content;
+        mfragmentContainerId = R.layout.activity_main;
         mfragmentArgs = new Bundle();
     }
 

@@ -15,32 +15,59 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-        <EditText
-            android:layout_width="233dp"
+        <TextView
+            android:id="@+id/basicInfoTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pollName"
-            android:hint="@string/poll_name_hint"
-            android:textStyle="italic"
-            android:textSize="20sp" />
+            android:text="@string/basicInformation"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/standard_margin"
+            android:layout_marginBottom="5dp"/>
 
         <EditText
-            android:layout_width="240dp"
+            android:id="@+id/pollName"
+            android:hint="@string/poll_name_hint"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="20sp"
+            android:layout_below="@+id/basicInfoTextView"
+            android:layout_marginLeft="@dimen/spanned_margin"/>
+
+        <EditText
             android:id="@+id/pollDesc"
             android:hint="@string/poll_desc_hint"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:textStyle="italic"
             android:textSize="20sp"
             android:layout_below="@+id/pollName"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/spanned_margin"/>
 
+        <TextView
+            android:id="@+id/optionsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/options"
+            android:layout_below="@+id/pollDesc"
+            android:layout_margin="@dimen/standard_margin"/>
+
+        <!-- CATEGORICAL IMPERATIFS! FKRS-->
         <EditText
             android:id="@+id/txtItem"
-            android:layout_width="240dp"
+            android:hint="@string/hintTxtItem"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pollDesc"
+            android:layout_below="@+id/optionsTextView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="@dimen/spanned_margin"
+            android:layout_marginRight="@dimen/spanned_margin"
+            android:inputType="text"
+            />
 
         <Button
             android:id="@+id/btnAdd"
@@ -52,9 +79,22 @@
 
         <ListView
             android:id="@+id/list"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btnAdd" />
+            android:layout_below="@+id/btnAdd"
+            android:choiceMode="multipleChoice"
+            android:focusable="true"
+            android:fastScrollEnabled="true"
+            style="@style/ListView"
+            android:clickable="true"
+            android:drawSelectorOnTop="true"
+            android:fastScrollAlwaysVisible="true"
+            android:footerDividersEnabled="true"
+            android:headerDividersEnabled="true"
+            android:longClickable="true"
+            android:nestedScrollingEnabled="true"
+            android:scrollingCache="true"
+            android:layout_above="@+id/savePollBtn" />
 
         <Button
             android:id="@+id/savePollBtn"
@@ -62,7 +102,6 @@
             android:layout_height="wrap_content"
             android:text="@string/save_poll"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="200dp"
             />
 
     </RelativeLayout>

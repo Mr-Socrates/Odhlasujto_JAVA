@@ -14,4 +14,10 @@ This folder contains list of main used technologies and corresponding steps to g
 
 : http://actionbarsherlock.com/usage.html
 
-http://wptrafficanalyzer.in/blog/dynamically-add-items-to-listview-in-android/
+## ActionBar
+
+: http://www.androidbegin.com/tutorial/implementing-actionbarsherlock-side-menu-navigation-with-fragment-tabs-tutorial/
+
+## Dynamic ARRAYs
+: http://wptrafficanalyzer.in/blog/dynamically-add-items-to-listview-in-android/
+(done trough additional SDK - pointless)

@@ -1,30 +1,34 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.os.Bundle;
+import android.os.Handler;  //used in Menus
 import android.app.Fragment;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.URLSpan;
-import android.util.Log;
+
+import android.content.Context;
+import android.content.Intent;
+
 import android.view.LayoutInflater;
-//import android.view.Menu;
-//import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-
-import android.net.wifi.WifiManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import android.text.style.URLSpan;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.util.Log;
+import android.net.wifi.WifiManager;
+
+    import android.widget.ArrayAdapter;
     import android.os.AsyncTask;
     import org.json.JSONObject;
     import org.json.JSONException;
@@ -39,18 +43,16 @@ import android.widget.Switch;
     import java.util.Collections;
     import java.util.Comparator;
 
-import android.widget.Toast;
-import android.content.Context;
+// SharedPreferences
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
-import android.view.View.OnClickListener;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+//Animations -9OLD Androids
+import com.nineoldandroids.animation.AnimatorSet;
 
-//import com.example.sharedpreferences.*;
-//import android.content.SharedPreferences;
-//import android.content.SharedPreferences.Editor;
-
-// Sherlock ActionBars lib if needed
+// Sherlock ActionBars lib
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -62,27 +64,31 @@ import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 import com.actionbarsherlock.app.*;
 
-public class MainActivity extends SherlockFragmentActivity implements TabListener{
+public class MainActivity extends SherlockFragmentActivity implements TabListener {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
-    private static final String URL =
-            "http://www.csita.cz/sklad/studenti.json";
+    public static final String PREFS_NAME = "MyPrefsFile";
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
-    ActionBar.Tab TabCreate,TabVote,TabResults;
+    private final Handler handler = new Handler();
+    ActionBar.Tab TabCreate, TabVote, TabResults;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        if (savedInstanceState == null) {
+//      //TODO PLACEHOLDER FRAGMENT - find out if its needed
+//      if (savedInstanceState == null) {
 //            getFragmentManager().beginTransaction()
 //                    .add(R.id.container, new PlaceholderFragment())
 //                    .commit();
 //        }
+
+        db db = new db(this);
+        db.getWritableDatabase().delete("polls", null, null);
 
         Button btnDownload = (Button) findViewById(R.id.btnDownload);
         /*btnDownload.setOnClickListener (new OnClickListener() {
@@ -94,6 +100,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
             }
         });*/
 
+        //region ACTION BAR
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);    // Create Actionbar Tabs
         actionBar.setDisplayShowHomeEnabled(false);
@@ -116,9 +123,10 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         actionBar.addTab(TabCreate);
         actionBar.addTab(TabVote);
         actionBar.addTab(TabResults);
-        actionBar.selectTab(TabVote);
+        actionBar.selectTab(TabCreate);
+        //endregion
 
-        //region CALLING FRAGMENTS
+        //region CALLING FRAGMENTS from OnClicks (redundant)
         /*
         Button createPoll = (Button) findViewById(R.id.create);
         Button vote = (Button) findViewById(R.id.vote);
@@ -201,37 +209,36 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         }
     }//endregion
 
-    //region MENU
-  /*  @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            case R.id.action_about:
-                Log.d(LOG, "Clicked on About");
-                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
-                activityMainLayout.removeAllViews();
-
-                LayoutInflater inflater = getLayoutInflater();
-                activityMainLayout.addView(inflater.inflate(R.layout.about_application, null));
-                return true;
-            case R.id.action_exit:
-                finish();
-                System.exit(0);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
-//endregion
+    //region OPTIONS MENU | Canvas Menu
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getSupportMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        switch (item.getItemId()) {
+//            case R.id.action_about:
+//                Log.d(LOG, "Clicked on About");
+//                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+//                activityMainLayout.removeAllViews();
+//
+//                LayoutInflater inflater = getLayoutInflater();
+//                activityMainLayout.addView(inflater.inflate(R.layout.about_application, null));
+//                return true;
+//            case R.id.action_exit:
+//                finish();
+//                System.exit(0);
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     //region IMPLEMENTED SHERLOCK METHODS (possible refactoring https://github.com/codepath/android_guides/wiki/ActionBar-Tabs-with-Fragments )
     @Override
@@ -244,7 +251,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     public void onTabReselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }//endregion
 
-    //region Adding DATA TO ARRAYS
+    //region READING /\ Adding DATA TO ARRAYS
     // Reads an InputStream and converts it to a String.
     public String readIt(InputStream stream, int len) throws IOException {
         Reader reader = new InputStreamReader(stream, "UTF-8");
@@ -304,10 +311,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                 e.printStackTrace();
             }
         }
-   //region DB /\ SORTING
+
+        //region DB /\ SORTING
         db db = new db(this);
         // jelikož nám zbyli nejspíš studenti z minula
-        db.getWritableDatabase().delete("studenti",null,null);
+        db.getWritableDatabase().delete("polls", null, null);
 
         db.insertPolls(data);
 
@@ -319,7 +327,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
         // setřídíme/vybereme setříděná data
         ArrayList<Poll> dataOrdered; //= new ArrayList<Student>(); --> pokud byste chtěli kolekci sami plnit (dataOrdered.add...)
-        if (!save) dataOrdered = order(data,by);
+        if (!save) dataOrdered = order(data, by);
         else {
             dataOrdered = db.getPolls(by);
         }
@@ -330,8 +338,8 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         v.setAdapter(adapter);
     }
 
-    // SORTING
-    private ArrayList<Poll> order(ArrayList<Poll> data,final String by) {
+    // SORTED ARRAY
+    private ArrayList<Poll> order(ArrayList<Poll> data, final String by) {
         Collections.sort(data, new Comparator<Poll>() {
             @Override
             public int compare(Poll s1, Poll s2) {
@@ -345,6 +353,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     }
     //endregion
 
+    // TODO DYNAMIC ADDING of OPTIONS / duplicated from FragmentCreate
     public void addOptions(View view) {
 
         /* Defining the ArrayAdapter to set items to ListView */
@@ -358,7 +367,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         adapter.notifyDataSetChanged();
 */
     }
+    //endregion
 
+    //region DOWNLOAD WEBPAGE / AsyncTask
     // Uses AsyncTask to create a task away from the main UI thread. This task takes a
     // URL string and uses it to create an HttpUrlConnection. Once the connection
     // has been established, the AsyncTask downloads the contents of the webpage as
@@ -375,8 +386,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                 return "Unable to retrieve web page. URL may be invalid.";
             }
         }
-    }
-//endregion
+    }//endregion
 
     //region PLACEHOLDER FRAGMENT
     /**
@@ -419,12 +429,29 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
      */
 //endregion
 
-    //region SAVING PREFERENCES
-    public static final String MyPREFERENCES = "MyPrefs" ;
-//    TODO saving
-//endregion
+    //region SAVING WIFI PREFERENCES on change and onStop()
+
+//    // get a set WiFi Settings
+//    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+//    Boolean spWiFiSetting = sharedPref.getBoolean("db_WiFi", false);
+
+
+//    @Override
+//    protected void onStop(){
+//        super.onStop();
+//
+//        // We need an Editor object to make preference changes.
+//        // All objects are from android.context.Context
+//        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+//        SharedPreferences.Editor editor = settings.edit();
+//        editor.putBoolean("PREFS_NAME", status);
+//
+//        // Commit the edits!
+//        editor.commit();
+//    }//endregion
 
     //region HW BUTTONS
+    /*
     @Override
     public void onBackPressed() {
         Toast.makeText(MainActivity.this, "Haha! :-)", Toast.LENGTH_SHORT).show();
@@ -441,6 +468,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
 //        super.onBackPressed();
         Log.d(LOG, "Pressed Back");
-    }
-//endregion
+    }*/
+    //endregion
 }
