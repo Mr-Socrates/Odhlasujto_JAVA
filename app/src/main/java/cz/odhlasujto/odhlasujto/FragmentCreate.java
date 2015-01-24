@@ -40,8 +40,6 @@ public class FragmentCreate extends SherlockFragment {
 
     private ArrayList<Poll> newPollArrayL;
 
-
-
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
 
@@ -50,6 +48,10 @@ public class FragmentCreate extends SherlockFragment {
         final EditText option = (EditText) view.findViewById(R.id.txtItem);
         final EditText pollName = (EditText) view.findViewById(R.id.pollName);
         final EditText pollDesc = (EditText) view.findViewById(R.id.pollDesc);
+
+        // Instance ArrayList & deklarace ArrayAdapteru
+        final ArrayList<String> list = new ArrayList<String>();
+        ArrayAdapter<String> adapter;
 
         newPollArrayL = new ArrayList<Poll>();
 
@@ -101,29 +103,22 @@ public class FragmentCreate extends SherlockFragment {
             @Override
             public void onClick(View v) {
 
-                // Instanciating an array list
-                List<String> list = new ArrayList<String>();
                 // This is the array adapter, it takes the context of the activity as a
                 // first parameter, the type of list view as a second parameter and your
                 // array as a third parameter.
 
-                Log.d(LOG, "Clicked on ADD OPTION: 0");
                 list.add(option.getText().toString());
-                Log.d(LOG, "Clicked on ADD OPTION: 1");
-
-//              adapter.notifyDataSetChanged();
 
                 lv.setAdapter(new ArrayAdapter<String>(
                       getActivity().getApplicationContext(),
                       android.R.layout.simple_list_item_1,
                       list));
-                Toast.makeText(getActivity().getApplicationContext(), "Option " +option.getText().toString() +" created.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
                 option.setText("");
-                Log.d(LOG, "Clicked on ADD OPTION: 2");
+        //adapter.notifyDataSetChanged();
             }
         });
         //endregion
-
         return view;
     }
 
@@ -132,20 +127,5 @@ public class FragmentCreate extends SherlockFragment {
         db newDB = new db(getActivity().getApplicationContext());
         SQLiteDatabase sqliteDatabase = newDB.getWritableDatabase();
         } //endregion
-
-    //region ARRAY FOR SAVING ITEMS
-   final ArrayList<String> list = new ArrayList<String>();
-   ArrayAdapter<String> adapter;
-
-   public class ListAdapter extends ArrayAdapter {
-        public ArrayAdapter<String> adapter;
-        public ArrayList<String> list = new ArrayList<String>();
-
-        public ListAdapter(Context context, int textViewResourceId) {
-            super(context, textViewResourceId);
-        }
-    }
-    //endregion
-
 
 }
