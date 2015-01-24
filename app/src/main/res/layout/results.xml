@@ -15,7 +15,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="40dp"
         android:textSize="18sp"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rowCount="10"
+        android:padding="10dp"
         android:id="@+id/gridLayout"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/votePollDesc"
@@ -113,14 +115,20 @@
     </GridLayout>
 
     <ListView
+        android:visibility="gone"
+
         android:layout_width="fill_parent"
         android:layout_height="200dp"
         android:id="@+id/listView"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity=""
         android:background="#efefef"
         android:gravity="bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        </ListView>
 
 </RelativeLayout>

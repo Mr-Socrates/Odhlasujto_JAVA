@@ -12,13 +12,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <Button
+            android:visibility="gone"
+
+            android:id="@+id/btnDownload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top"
-            android:id="@+id/btnDownload"
-            />
+            android:text="Download JSON"
+            android:textSize="7sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"

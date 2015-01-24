@@ -50,4 +50,9 @@ public class Poll {
     public void setSUM(int SUM) {
         this.SUM = SUM;
     }
+
+    public String toString() {
+        return "Poll [pollID=" + pollId + ", pollName=" + pollName + ", pollDesc=" + pollDesc
+                + "]";
+    }
 }

@@ -12,28 +12,43 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+
+import org.w3c.dom.Text;
 
 public class FragmentVote extends SherlockFragment {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
 
-    Fragment fragment;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+    SherlockFragment fragment;
+    public android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.vote, container, false);
+        final View view = inflater.inflate(R.layout.vote, container, false);
 
         final Button submitVote = (Button) view.findViewById(R.id.btnSubmitVote);
+        TextView textNAME = (TextView) view.findViewById(R.id.pollNameID);
+        TextView textDESC = (TextView) view.findViewById(R.id.pollDescID);
+
+        db db = new db(getActivity().getApplicationContext());
+        String dataName = db.getPollName();
+        String dataDesc = db.getPollDesc();
+        db.close();
+        textNAME.setText(dataName);
+        textDESC.setText(dataDesc);
+
 
 //        submitVote.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-////                FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
+////              FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
 //                Log.d(LOG, "Clicked on Submit Poll: declaration");
 //
 ////                fragmentCreateLayout.removeAllViews();
@@ -53,6 +68,4 @@ public class FragmentVote extends SherlockFragment {
 
         return view;
     }
-
-
 }
