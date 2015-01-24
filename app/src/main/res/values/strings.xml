@@ -20,7 +20,7 @@
     <string name="txtEmpty">List is empty</string>
     <string name="poll_name_hint">Poll name</string>
     <string name="poll_desc_hint">Poll description</string>
-    <string name="hintTxtItem">Enter poll option name here</string>
+    <string name="hintTxtItem">Enter poll options here..</string>
 
     <string name="submit_vote">Submit vote</string>
     <string name="save_poll">Save poll</string>

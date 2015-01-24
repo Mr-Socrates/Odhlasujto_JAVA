@@ -94,7 +94,8 @@
             android:longClickable="true"
             android:nestedScrollingEnabled="true"
             android:scrollingCache="true"
-            android:layout_above="@+id/savePollBtn" />
+            android:gravity="start"
+            android:maxHeight="100dp"/>
 
         <Button
             android:id="@+id/savePollBtn"
