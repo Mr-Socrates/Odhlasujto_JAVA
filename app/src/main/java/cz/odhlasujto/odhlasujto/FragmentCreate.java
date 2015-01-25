@@ -49,7 +49,7 @@ public class FragmentCreate extends SherlockFragment {
         final EditText pollName = (EditText) view.findViewById(R.id.pollName);
         final EditText pollDesc = (EditText) view.findViewById(R.id.pollDesc);
 
-        // Instance ArrayList & deklarace ArrayAdapteru
+        // Instance ArrayListu & deklarace ArrayAdapteru
         final ArrayList<String> list = new ArrayList<String>();
         ArrayAdapter<String> adapter;
 
@@ -77,6 +77,7 @@ public class FragmentCreate extends SherlockFragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Poll was saved with these values:", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity().getApplicationContext(), "Poll name: " +ziskanePollName + "\n Poll desc: " +ziskanePollDesc, Toast.LENGTH_SHORT).show();
 
+                Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
                 //region CALLING VOTE FRAGMENT from Save poll btn)
                 /*FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(R.id.fragment1); //scroll view of create_poll.XML
                 fragmentCreateLayout.removeAllViews();
