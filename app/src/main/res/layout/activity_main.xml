@@ -26,22 +26,6 @@
              android:focusableInTouchMode="true"
              android:fillViewport="true">
 
-             <Switch
-                 android:visibility="gone"
-
-                 android:id="@+id/wifi_switch"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginBottom="35dp"
-                 android:checked="false"
-                 android:text="@string/wifi_settings"
-                 android:textColor="@android:color/black"
-                 android:textOff="OFF"
-                 android:textOn="ON"
-                 android:layout_alignParentBottom="true"
-                 android:layout_alignParentRight="true"
-                 android:layout_alignParentEnd="true" />
-
          </RelativeLayout>
 
     </ScrollView>

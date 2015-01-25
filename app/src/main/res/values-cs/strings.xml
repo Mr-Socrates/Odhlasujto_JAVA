@@ -30,4 +30,5 @@
     <string name="loading">Loading</string>
     <string name="basicInformation">Basic information</string>
     <string name="options">Options of the poll</string>
+    <string name="emptyOptionName">Enpty option name</string>
 </resources>

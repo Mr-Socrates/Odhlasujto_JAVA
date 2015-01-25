@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -82,20 +82,22 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnAdd"
-            android:choiceMode="multipleChoice"
-            android:focusable="true"
+            android:layout_above="@+id/savePollBtn"
+            android:gravity="start"
+
+
             android:fastScrollEnabled="true"
-            style="@style/ListView"
-            android:clickable="true"
-            android:drawSelectorOnTop="true"
             android:fastScrollAlwaysVisible="true"
-            android:footerDividersEnabled="true"
-            android:headerDividersEnabled="true"
-            android:longClickable="true"
+            android:smoothScrollbar="true"
+            android:drawSelectorOnTop="true"
+
             android:nestedScrollingEnabled="true"
             android:scrollingCache="true"
-            android:gravity="start"
-            android:maxHeight="100dp"/>
+
+
+
+            android:headerDividersEnabled="true"
+            android:footerDividersEnabled="true"/>
 
         <Button
             android:id="@+id/savePollBtn"
@@ -107,4 +109,4 @@
 
     </RelativeLayout>
 
-</ScrollView>
+</LinearLayout>

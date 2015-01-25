@@ -94,11 +94,10 @@ public class FragmentCreate extends SherlockFragment {
             }
         });//endregion
 
-        //region DYNAMIC ADDING of TextViews
+        //region DYNAMIC ADDING of TextViews to ListView
         btnAddOption.setOnClickListener(new View.OnClickListener() {
 
             ListView lv = (ListView) view.findViewById(R.id.list);
-            String[] listS;
 
             @Override
             public void onClick(View v) {
@@ -111,7 +110,7 @@ public class FragmentCreate extends SherlockFragment {
 
                 lv.setAdapter(new ArrayAdapter<String>(
                       getActivity().getApplicationContext(),
-                      android.R.layout.simple_list_item_1,
+                      R.layout.listview_item_create_option,
                       list));
                 Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
                 option.setText("");

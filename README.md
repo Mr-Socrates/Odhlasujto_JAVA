@@ -21,3 +21,6 @@ This folder contains list of main used technologies and corresponding steps to g
 ### Dynamic ARRAYs
 : http://wptrafficanalyzer.in/blog/dynamically-add-items-to-listview-in-android/
 (also can be done trough additional SDK but that is pointless, see above tutorial)
+
+### Input Methods and visibility of keyboard on inputs
+: https://developer.android.com/training/keyboard-input/visibility.html

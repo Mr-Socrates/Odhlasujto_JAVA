@@ -184,30 +184,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         */
 //endregion
 
-        //region Wi-Fi Switch
-        Switch toggle = (Switch) findViewById(R.id.wifi_switch);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    toggleWiFi(true);
-                    Toast.makeText(getApplicationContext(), "Wi-Fi Enabled!", Toast.LENGTH_LONG).show();
-                } else {
-                    toggleWiFi(false);
-                    Toast.makeText(getApplicationContext(), "Wi-Fi Disabled!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });//endregion
     }
-    //region Wi-Fi Service
-    public void toggleWiFi(boolean status) {
-        WifiManager wifiManager = (WifiManager) this
-                .getSystemService(Context.WIFI_SERVICE);
-        if (status == true && !wifiManager.isWifiEnabled()) {
-            wifiManager.setWifiEnabled(true);
-        } else if (status == false && wifiManager.isWifiEnabled()) {
-            wifiManager.setWifiEnabled(false);
-        }
-    }//endregion
 
     //region OPTIONS MENU | Canvas Menu
 //    @Override
