@@ -4,7 +4,6 @@ public class Poll {
     private int pollId;
     private String pollName;
     private String pollDesc;
-    private String optionName;
     private int SUM;
 
     public Poll() {
@@ -33,14 +32,6 @@ public class Poll {
 
     public void setPollDesc(String pollDesc) {
         this.pollDesc = pollDesc;
-    }
-
-    public String getOptionName() {
-        return this.optionName;
-    }
-
-    public void setOptionName(String optionName) {
-        this.optionName = optionName;
     }
 
     public int getSUM() {

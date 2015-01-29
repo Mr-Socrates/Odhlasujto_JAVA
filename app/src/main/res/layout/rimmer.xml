@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/textT"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:gravity="center_vertical"
+    android:textColor="@android:color/black"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pollIdMUSTR"
-        android:layout_marginLeft="10dp"/>
+    android:textIsSelectable="false"
+    android:inputType="text"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pollNameMUSTR"
-        android:layout_marginLeft="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pollDescMUSTR"
-        android:layout_marginLeft="10dp"/>
+    android:enabled="true"
+    android:clickable="true"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/optionNameMUSTR"
-        android:layout_marginLeft="10dp"/>
+    android:paddingLeft="@dimen/standard_margin"
+    android:paddingRight="@dimen/standard_margin">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/SUMMUSTR"
-        android:layout_marginLeft="10dp"/>
-</LinearLayout>
+</TextView>

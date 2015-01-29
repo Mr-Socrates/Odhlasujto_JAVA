@@ -9,18 +9,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
-public class Adapter extends BaseAdapter {
+/**
+ * Created by Martin on 29.01.15.
+ */
+public class AdapterOptions extends BaseAdapter {
 
     FragmentActivity activity;
-    List<Poll> data = new ArrayList<Poll>();
+    List<Options> data = new ArrayList<Options>();
 
-    public Adapter(FragmentActivity activity, List<Poll> data) {
+    public AdapterOptions(FragmentActivity activity, List<Options> data) {
         this.activity = activity;
         this.data = data;
     }
@@ -45,27 +44,16 @@ public class Adapter extends BaseAdapter {
         return fillView(i);
     }
 
-
     public View fillView(int i) {
         Context context = activity.getApplicationContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
+
         View view = null;
-
         view = inflater.inflate(R.layout.rimmer, null);
-        TextView t0 = (TextView) view.findViewById(R.id.pollIdMUSTR);
-        t0.setText(String.valueOf(data.get(i).getPollId()));
-
-        TextView t1 = (TextView) view.findViewById(R.id.pollNameMUSTR);
-        t1.setText(data.get(i).getPollName());
-
-        TextView t2 = (TextView) view.findViewById(R.id.pollDescMUSTR);
-        t2.setText(data.get(i).getPollDesc());
-
-        TextView t4 = (TextView) view.findViewById(R.id.SUMMUSTR);
-        t4.setText(data.get(i).getSUM());
+        TextView t3 = (TextView) view.findViewById(R.id.optionNameMUSTR);
+        t3.setText(data.get(i).getOptionName());
 
         return view;
     }
-
 }

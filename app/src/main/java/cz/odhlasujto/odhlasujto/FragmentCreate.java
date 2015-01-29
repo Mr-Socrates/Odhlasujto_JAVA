@@ -39,6 +39,7 @@ public class FragmentCreate extends SherlockFragment {
     android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     private ArrayList<Poll> newPollArrayL;
+    private ArrayList<Options> newOptionArrayL;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +54,9 @@ public class FragmentCreate extends SherlockFragment {
         final ArrayList<String> list = new ArrayList<String>();
         ArrayAdapter<String> adapter;
 
+
         newPollArrayL = new ArrayList<Poll>();
+        newOptionArrayL = new ArrayList<Options>();
 
         //region SUBMIT Poll
         final Button submitPoll = (Button) view.findViewById(R.id.savePollBtn);
@@ -64,6 +67,7 @@ public class FragmentCreate extends SherlockFragment {
                 //něco zkoušim dát do databáze
                 String ziskanePollName = pollName.getText().toString();
                 String ziskanePollDesc = pollDesc.getText().toString();
+
                 //předání do setterů
                 Poll newPoll = new Poll();
                 newPoll.setPollName(ziskanePollName);
@@ -77,7 +81,8 @@ public class FragmentCreate extends SherlockFragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Poll was saved with these values:", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity().getApplicationContext(), "Poll name: " +ziskanePollName + "\n Poll desc: " +ziskanePollDesc, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
+
                 //region CALLING VOTE FRAGMENT from Save poll btn)
                 /*FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(R.id.fragment1); //scroll view of create_poll.XML
                 fragmentCreateLayout.removeAllViews();
@@ -113,9 +118,23 @@ public class FragmentCreate extends SherlockFragment {
                       getActivity().getApplicationContext(),
                       R.layout.listview_item_create_option,
                       list));
-                Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
+
+                String ziskaneOptionName = option.getText().toString();
+
+                //předání do setterů
+                Options newOption = new Options();
+                newOption.setOptionName(ziskaneOptionName);
+                //dosazení do ArrayListu
+                newOptionArrayL.add(newOption);
+                dboptions dboptions = new dboptions(getActivity().getApplicationContext());
+                dboptions.insertOption(newOptionArrayL);
+
+                Toast.makeText(getActivity().getApplicationContext(), "Options:  " +ziskaneOptionName, Toast.LENGTH_SHORT).show();
+
                 option.setText("");
-        //adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged()
+
             }
         });
         //endregion

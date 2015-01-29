@@ -1,5 +1,6 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -11,14 +12,21 @@ import android.util.Log;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentVote extends SherlockFragment {
 
@@ -27,6 +35,8 @@ public class FragmentVote extends SherlockFragment {
     SherlockFragment fragment;
     public android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
+    String options = "options";
+    private List optionNames;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,13 +46,37 @@ public class FragmentVote extends SherlockFragment {
         final Button submitVote = (Button) view.findViewById(R.id.btnSubmitVote);
         TextView textNAME = (TextView) view.findViewById(R.id.pollNameID);
         TextView textDESC = (TextView) view.findViewById(R.id.pollDescID);
+        ListView textOPTION = (ListView) view.findViewById(R.id.listOption);
+        SimpleCursorAdapter dataAdapter;
+
+
+        optionNames = new ArrayList();
 
         db db = new db(getActivity().getApplicationContext());
+        dboptions dboptions = new dboptions(getActivity().getApplicationContext());
+
         String dataName = db.getPollName();
         String dataDesc = db.getPollDesc();
         db.close();
         textNAME.setText(dataName);
         textDESC.setText(dataDesc);
+
+        final ArrayList<String> list = new ArrayList<String>();
+        //ArrayAdapter<String> adapter;
+
+        Cursor cursor = dboptions.getOptions();
+
+        String from [] = new String[]{dboptions.ID};
+        int to [] = new int[] {R.id.textT};
+
+        while(cursor.moveToNext()) {
+            dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
+            textOPTION.setAdapter(dataAdapter);
+        }
+        while(cursor.moveToNext()) {
+
+            Log.d(LOG, cursor.getString(cursor.getColumnIndex("optionName")));
+        }
 
 
 //        submitVote.setOnClickListener(new View.OnClickListener() {
