@@ -3,6 +3,7 @@ package cz.odhlasujto.odhlasujto;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,10 +24,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.lang.String.valueOf;
+
 public class db extends SQLiteOpenHelper {
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
 
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
     public static final String DATABASE_NAME = "mydb";
 
     public static final String TABLE_POLLS = "polls";
@@ -34,21 +37,22 @@ public class db extends SQLiteOpenHelper {
     public static final String POLL_ID = "pollId";
     public static final String SQL_CREATE_POLLS =
             "CREATE TABLE " + TABLE_POLLS + " ("
-                    + POLL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT "
-                    + COL_NAME_POLL + " TEXT, pollDesc TEXT, "
+                    + POLL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + COL_NAME_POLL + " TEXT, pollDesc TEXT "
                     + ");";
 
     public static final String TABLE_OPTIONS = "options";
     public static final String COL_NAME_OPTION = "optionName";
     public static final String ID = "_id";
+    public static final String CREATED_POLL = "createdPoll";
     public static final String SUM = "sum";
     public static final String SQL_CREATE_OPTIONS =
             "CREATE TABLE " + TABLE_OPTIONS + " ("
                     + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COL_NAME_OPTION + " TEXT NOT NULL, "
-                    + SUM + " INTEGER "
-                    + ");";
-
+                    + SUM + " INTEGER, "
+                    + CREATED_POLL + " integer, "
+                    + "FOREIGN KEY ("+CREATED_POLL+") REFERENCES "+TABLE_POLLS+" ("+POLL_ID+"));";
 
     public db(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -165,7 +169,27 @@ public class db extends SQLiteOpenHelper {
         for (Options option : options) {
             // použití čistého SQL dotazu by bylo rychlejší, zvláště u velkých objemů dat
             ContentValues values = new ContentValues();
+            SQLiteDatabase db = this.getReadableDatabase();
+
             values.put(COL_NAME_OPTION, option.getOptionName());
+            //values.put(CREATED_POLL, valueOf(db.rawQuery("SELECT pollId FROM polls", null)));
+            Cursor createdPoll = null;
+            Cursor c = db.rawQuery("SELECT pollId FROM polls ORDER BY pollId DESC LIMIT 1", null);
+            //values.put(CREATED_POLL, valueOf(c));
+            Log.d("XXXXXX", DatabaseUtils.dumpCursorToString(c));
+
+
+            if (c != null && c.getCount() > 0) {
+                {
+                    c.moveToFirst();
+                    do {
+                        createdPoll = c;
+                        Log.d(LOG, "CP: " + createdPoll.getString(0));
+                    } while (c.moveToNext());
+                }
+            }
+            Log.d("XXXXXX", DatabaseUtils.dumpCursorToString(c));
+
             getWritableDatabase().insert(TABLE_OPTIONS, null, values);
         }
     }
@@ -173,7 +197,7 @@ public class db extends SQLiteOpenHelper {
     public Cursor getOptions() {
         Cursor optionNamefromDB = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT _id, optionName FROM options";
+        String selectQuery = "SELECT _id, optionName FROM polls, options WHERE polls.pollId = options.createdPoll";
         //String selectQuery = "SELECT " + COL_NAME_POLL + " FROM " + TABLE_POLLS;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor != null && cursor.getCount() > 0) {
@@ -194,7 +218,7 @@ public class db extends SQLiteOpenHelper {
     public ArrayList<Cursor> getData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String[] columns = new String[]{"mesage"};
+        String[] columns = new String[]{"mesage"};ß
         //an array list of cursor to save two cursors one has results from the query
         //other cursor stores error message if any errors are triggered
         ArrayList<Cursor> alc = new ArrayList<Cursor>(2);
