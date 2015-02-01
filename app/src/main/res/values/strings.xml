@@ -33,6 +33,15 @@
     <string name="basicInformation">New poll basic information</string>
     <string name="options">Options of the poll</string>
     <string name="emptyOptionName">Empty option name</string>
+    <string name="chyba">Error!</string>
+    <string name="chyba1">All items are mandatory!</string>
+    <string name="chyba2">Option can not be empty!</string>
+    <string name="createtab">Create</string>
+    <string name="votetab">Vote</string>
+    <string name="resultstab">Results</string>
+    <string name="oznameni">Information</string>
+    <string name="oznameni1">Device is online!</string>
+    <string name="oznameni2">Device is not online!</string>
     <string name="lore">Lore ipsum</string>
     <string name="lore2">Testové hlasování</string>
     <string name="optionFlatus">Option 1</string>

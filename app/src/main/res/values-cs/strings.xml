@@ -35,4 +35,17 @@
     <string name="lore2">Testové hlasování</string>
     <string name="optionFlatus">Option 1</string>
     <string name="btnDownloadJSON">Download JSON</string>
+    <string name="loading">Načítání</string>
+    <string name="basicInformation">Základní informace</string>
+    <string name="options">Možnosti hlasování</string>
+    <string name="emptyOptionName">Bez názvu</string>
+    <string name="chyba">Chyba!</string>
+    <string name="chyba1">Všechny položky formuláře jsou povinné!</string>
+    <string name="chyba2">Možnost hlasování nemůže být prázdná!</string>
+    <string name="createtab">Vytvořit</string>
+    <string name="votetab">Hlasovat</string>
+    <string name="resultstab">Výsledky</string>
+    <string name="oznameni">Oznámení</string>
+    <string name="oznameni1">Zařízení je online!</string>
+    <string name="oznameni2">Zařízení není online!</string>
 </resources>

@@ -1,5 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;  //used in Menus
 import android.app.Fragment;
@@ -87,9 +89,29 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         if (OnlineTool.isOnline()) {
             setContentView(R.layout.activity_main);
             Toast.makeText(this, "Zařízení je online.", Toast.LENGTH_SHORT).show();
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle(getString(R.string.oznameni));
+            alertDialog.setMessage(getString(R.string.oznameni1));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         } else {
             setContentView(R.layout.activity_main);
             Toast.makeText(this, "Zařízení je offline.", Toast.LENGTH_SHORT).show();
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle(getString(R.string.oznameni));
+            alertDialog.setMessage(getString(R.string.oznameni2));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
 
 //      //TODO PLACEHOLDER FRAGMENT - find out if its needed
@@ -120,16 +142,16 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         actionBar.setDisplayShowTitleEnabled(false);
 
         // Set Tab Icon and Titles
-        TabCreate = actionBar.newTab().setText("Create");
-        TabVote = actionBar.newTab().setText("Vote");
-        TabResults = actionBar.newTab().setText("Results");
+        TabCreate = actionBar.newTab().setText(getString(R.string.createtab));
+        TabVote = actionBar.newTab().setText(getString(R.string.votetab));
+        TabResults = actionBar.newTab().setText(getString(R.string.resultstab));
 
         // Set Tab Listeners
-        TabCreate.setTabListener(new SherlockTabListener<FragmentCreate>(R.id.container, this, "Create",
+        TabCreate.setTabListener(new SherlockTabListener<FragmentCreate>(R.id.container, this, getString(R.string.createtab),
                 FragmentCreate.class));
-        TabVote.setTabListener(new SherlockTabListener<FragmentVote>(R.id.container, this, "Vote",
+        TabVote.setTabListener(new SherlockTabListener<FragmentVote>(R.id.container, this, getString(R.string.votetab),
                 FragmentVote.class));
-        TabResults.setTabListener(new SherlockTabListener<FragmentResults>(R.id.container, this, "Results",
+        TabResults.setTabListener(new SherlockTabListener<FragmentResults>(R.id.container, this, getString(R.string.resultstab),
                 FragmentResults.class));
 
         // Add tabs to actionbar

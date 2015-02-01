@@ -1,7 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
 public class Poll {
-    private String pollId;
+    public String pollId;
     private String pollName;
     private String pollDesc;
     private int SUM;

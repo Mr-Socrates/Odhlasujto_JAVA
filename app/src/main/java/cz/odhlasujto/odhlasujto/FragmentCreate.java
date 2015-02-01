@@ -1,6 +1,8 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +38,7 @@ public class FragmentCreate extends SherlockFragment {
     private static final String LOG = MainActivity.class.getSimpleName(); //printing out LOGs
 
     SherlockFragment fragment;
-//    <--TODO PROBABLY SUPPORT 4??? -->
+    //    <--TODO PROBABLY SUPPORT 4??? -->
     public android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
 
@@ -64,27 +67,44 @@ public class FragmentCreate extends SherlockFragment {
             @Override
             public void onClick(View v) {
 
-                //něco zkoušim dát do databáze
-                String ziskanePollName = pollName.getText().toString();
-                String ziskanePollDesc = pollDesc.getText().toString();
+                if (pollName.getText().toString().isEmpty() ||
+                        pollDesc.getText().toString().isEmpty()) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(FragmentCreate.this.getActivity().getWindow().getContext()).create();
+                    alertDialog.setTitle(getString(R.string.chyba));
+                    alertDialog.setMessage(getString(R.string.chyba1));
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
 
-                //předání do setterů
-                Poll newPoll = new Poll();
-                newPoll.setPollName(ziskanePollName);
-                newPoll.setPollDesc(ziskanePollDesc);
-                //dosazení do ArrayListu
-                newPollArrayL.add(newPoll);
-                db db = new db(getActivity().getApplicationContext());
-                db.insertPolls(newPollArrayL);
+                    //něco zkoušim dát do databáze
+                    String ziskanePollName = pollName.getText().toString();
+                    String ziskanePollDesc = pollDesc.getText().toString();
 
-                //feedback toasts
-                Toast.makeText(getActivity().getApplicationContext(), "Poll was saved with these values:", Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity().getApplicationContext(), "Poll name: " +ziskanePollName + "\n Poll desc: " +ziskanePollDesc, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
+                    //předání do setterů
+                    Poll newPoll = new Poll();
+                    newPoll.setPollName(ziskanePollName);
+                    newPoll.setPollDesc(ziskanePollDesc);
+                    //dosazení do ArrayListu
+                    newPollArrayL.add(newPoll);
+                    db db = new db(getActivity().getApplicationContext());
+                    db.insertPolls(newPollArrayL);
 
-                //Log.d("newPollArrayL", String.valueOf(newPollArrayL));
+                    //feedback toasts
+                    Toast.makeText(getActivity().getApplicationContext(), "Poll was saved with these values:", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Poll name: " + ziskanePollName + "\n Poll desc: " + ziskanePollDesc, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Options:  " + list, Toast.LENGTH_SHORT).show();
+                    //Log.d("newPollArrayL", String.valueOf(newPollArrayL));
 
-                //region CALLING VOTE FRAGMENT from Save poll btn)
+                    Toast.makeText(getActivity().getApplicationContext(), "All polls: " + db.getAllPolls(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "newPollArrayL: " + newPollArrayL, Toast.LENGTH_LONG).show();
+                    Log.d("newPollArrayL", String.valueOf(newPollArrayL));
+
+                    //region CALLING VOTE FRAGMENT from Save poll btn)
                 /*FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(R.id.fragment1); //scroll view of create_poll.XML
                 fragmentCreateLayout.removeAllViews();
                 Log.d(LOG, "Clicked on Submit Poll: remove fragment view");
@@ -97,7 +117,8 @@ public class FragmentCreate extends SherlockFragment {
                 fragmentTransaction.replace(R.id.container, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();*/
-                //endregion
+                    //endregion
+                }
             }
         });//endregion
 
@@ -113,37 +134,56 @@ public class FragmentCreate extends SherlockFragment {
                 // first parameter, the type of list view as a second parameter and your
                 // array as a third parameter.
 
-                list.add(option.getText().toString());
+                //Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
 
-                lv.setAdapter(new ArrayAdapter<String>(
-                      getActivity().getApplicationContext(),
-                      R.layout.listview_item_create_option,
-                      list));
 
-                String ziskaneOptionName = option.getText().toString();
+                if (option.getText().toString().isEmpty()) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(FragmentCreate.this.getActivity().getWindow().getContext()).create();
+                    alertDialog.setTitle(getString(R.string.chyba));
+                    alertDialog.setMessage(getString(R.string.chyba2));
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                } else {
 
-                //předání do setterů
-                Options newOption = new Options();
-                newOption.setOptionName(ziskaneOptionName);
-                //dosazení do ArrayListu
-                newOptionArrayL.add(newOption);
-                db db = new db(getActivity().getApplicationContext());
-                db.insertOption(newOptionArrayL);
+                    list.add(option.getText().toString());
 
-                Toast.makeText(getActivity().getApplicationContext(), "Option:  " +ziskaneOptionName +" created.", Toast.LENGTH_SHORT).show();
+                    lv.setAdapter(new ArrayAdapter<String>(
+                            getActivity().getApplicationContext(),
+                            R.layout.listview_item_create_option,
+                            list));
 
-                option.setText("");
-        //adapter.notifyDataSetChanged()
+                    String ziskaneOptionName = option.getText().toString();
 
+                    //předání do setterů
+                    Options newOption = new Options();
+                    newOption.setOptionName(ziskaneOptionName);
+                    //dosazení do ArrayListu
+                    newOptionArrayL.add(newOption);
+                    db db = new db(getActivity().getApplicationContext());
+                    db.insertOption(newOptionArrayL);
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Option:  " + ziskaneOptionName + " created.", Toast.LENGTH_SHORT).show();
+
+                    option.setText("");
+                    //adapter.notifyDataSetChanged()
+
+                }
             }
+
         });
         //endregion
         return view;
     }
 
-        //region přidání položek do DB
-        public void insertPoll(Poll paraPoll){
+    //region přidání položek do DB
+    public void insertPoll(Poll paraPoll) {
         db newDB = new db(getActivity().getApplicationContext());
         SQLiteDatabase sqliteDatabase = newDB.getWritableDatabase();
-        } //endregion
+    } //endregion
+
 }
