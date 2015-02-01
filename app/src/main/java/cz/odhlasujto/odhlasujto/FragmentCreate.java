@@ -1,6 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Activity;
@@ -54,7 +55,6 @@ public class FragmentCreate extends SherlockFragment {
         final ArrayList<String> list = new ArrayList<String>();
         ArrayAdapter<String> adapter;
 
-
         newPollArrayL = new ArrayList<Poll>();
         newOptionArrayL = new ArrayList<Options>();
 
@@ -80,8 +80,11 @@ public class FragmentCreate extends SherlockFragment {
                 //feedback toasts
                 Toast.makeText(getActivity().getApplicationContext(), "Poll was saved with these values:", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity().getApplicationContext(), "Poll name: " +ziskanePollName + "\n Poll desc: " +ziskanePollDesc, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
 
-                //Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "All polls: " + db.getAllPolls(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "newPollArrayL: " + newPollArrayL, Toast.LENGTH_LONG).show();
+                Log.d("newPollArrayL", String.valueOf(newPollArrayL));
 
                 //region CALLING VOTE FRAGMENT from Save poll btn)
                 /*FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(R.id.fragment1); //scroll view of create_poll.XML
@@ -127,10 +130,10 @@ public class FragmentCreate extends SherlockFragment {
                 newOption.setOptionName(ziskaneOptionName);
                 //dosazení do ArrayListu
                 newOptionArrayL.add(newOption);
-                dboptions dboptions = new dboptions(getActivity().getApplicationContext());
-                dboptions.insertOption(newOptionArrayL);
+                db db = new db(getActivity().getApplicationContext());
+                db.insertOption(newOptionArrayL);
 
-                Toast.makeText(getActivity().getApplicationContext(), "Options:  " +ziskaneOptionName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Option:  " +ziskaneOptionName +" created.", Toast.LENGTH_SHORT).show();
 
                 option.setText("");
         //adapter.notifyDataSetChanged()

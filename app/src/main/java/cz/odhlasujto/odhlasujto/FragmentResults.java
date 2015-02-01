@@ -1,5 +1,6 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -39,6 +40,15 @@ public class FragmentResults extends SherlockFragment {
         textNAME.setText(dataName);
         textDESC.setText(dataDesc);
 
+        //region AndroidDatabaseMANAGER
+        Button button =(Button) view.findViewById(R.id.SQLVIEWER);
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+
+                Intent dbmanager = new Intent(getActivity(),AndroidDatabaseManager.class);
+                startActivity(dbmanager);
+            }
+        });//endregion
 
 //        final Button btnBack = (Button) view.findViewById(R.id.btnBack);
 //

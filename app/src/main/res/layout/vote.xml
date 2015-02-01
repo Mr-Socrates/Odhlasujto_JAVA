@@ -52,9 +52,12 @@
             android:id="@+id/pollNameID"
             android:text="Testové hlasování"
             android:textSize="18sp"
-            android:layout_alignTop="@+id/votePollName"
+            android:layout_above="@+id/pollDescID"
             android:layout_toRightOf="@+id/votePollDesc"
-            android:layout_toEndOf="@+id/votePollDesc" />
+            android:layout_toEndOf="@+id/votePollDesc"
+            android:layout_marginLeft="33dp"
+            android:layout_marginStart="33dp"
+            android:textAlignment="viewEnd" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +67,8 @@
             android:text="Lore ipsum"
             android:layout_alignTop="@+id/votePollDesc"
             android:layout_alignRight="@+id/pollNameID"
-            android:layout_alignEnd="@+id/pollNameID" />
+            android:layout_alignEnd="@+id/pollNameID"
+            android:textAlignment="viewEnd" />
 
         <!--layout for showing poll options | example-->
         <ListView

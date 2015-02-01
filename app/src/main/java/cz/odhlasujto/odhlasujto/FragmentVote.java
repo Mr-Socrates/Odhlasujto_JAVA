@@ -49,24 +49,22 @@ public class FragmentVote extends SherlockFragment {
         ListView textOPTION = (ListView) view.findViewById(R.id.listOption);
         SimpleCursorAdapter dataAdapter;
 
-
         optionNames = new ArrayList();
 
         db db = new db(getActivity().getApplicationContext());
-        dboptions dboptions = new dboptions(getActivity().getApplicationContext());
 
         String dataName = db.getPollName();
         String dataDesc = db.getPollDesc();
-        db.close();
+
         textNAME.setText(dataName);
         textDESC.setText(dataDesc);
 
         final ArrayList<String> list = new ArrayList<String>();
         //ArrayAdapter<String> adapter;
 
-        Cursor cursor = dboptions.getOptions();
+        Cursor cursor = db.getOptions();
 
-        String from [] = new String[]{dboptions.ID};
+        String from [] = new String[]{db.ID};
         int to [] = new int[] {R.id.textT};
 
         while(cursor.moveToNext()) {
@@ -76,6 +74,7 @@ public class FragmentVote extends SherlockFragment {
         while(cursor.moveToNext()) {
 
             Log.d(LOG, cursor.getString(cursor.getColumnIndex("optionName")));
+
         }
 
 
@@ -99,7 +98,7 @@ public class FragmentVote extends SherlockFragment {
 ////                Log.d(LOG, "Clicked on Submit POLL Btn");
 //            }
 //        });
-
+        db.close();
         return view;
     }
 }

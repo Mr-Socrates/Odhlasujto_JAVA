@@ -1,12 +1,8 @@
 package cz.odhlasujto.odhlasujto;
 
-/**
- * Created by Martin on 29.01.15.
- */
 public class Options {
     private int optionID;
     private String optionName;
-
 
     public Options() {
 
