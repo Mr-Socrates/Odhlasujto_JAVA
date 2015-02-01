@@ -218,7 +218,7 @@ public class db extends SQLiteOpenHelper {
     public ArrayList<Cursor> getData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String[] columns = new String[]{"mesage"};ß
+        String[] columns = new String[]{"mesage"};
         //an array list of cursor to save two cursors one has results from the query
         //other cursor stores error message if any errors are triggered
         ArrayList<Cursor> alc = new ArrayList<Cursor>(2);

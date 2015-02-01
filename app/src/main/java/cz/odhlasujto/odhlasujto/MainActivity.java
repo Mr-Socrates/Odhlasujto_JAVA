@@ -119,16 +119,16 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         actionBar.setDisplayShowTitleEnabled(false);
 
         // Set Tab Icon and Titles
-        TabCreate = actionBar.newTab().setText("Create");
-        TabVote = actionBar.newTab().setText("Vote");
-        TabResults = actionBar.newTab().setText("Results");
+        TabCreate = actionBar.newTab().setText(getString(R.string.createtab));
+        TabVote = actionBar.newTab().setText(getString(R.string.votetab));
+        TabResults = actionBar.newTab().setText(getString(R.string.resultstab));
 
         // Set Tab Listeners
-        TabCreate.setTabListener(new SherlockTabListener<FragmentCreate>(R.id.container, this, "Create",
+        TabCreate.setTabListener(new SherlockTabListener<FragmentCreate>(R.id.container, this, getString(R.string.createtab),
                 FragmentCreate.class));
-        TabVote.setTabListener(new SherlockTabListener<FragmentVote>(R.id.container, this, "Vote",
+        TabVote.setTabListener(new SherlockTabListener<FragmentVote>(R.id.container, this, getString(R.string.votetab),
                 FragmentVote.class));
-        TabResults.setTabListener(new SherlockTabListener<FragmentResults>(R.id.container, this, "Results",
+        TabResults.setTabListener(new SherlockTabListener<FragmentResults>(R.id.container, this, getString(R.string.resultstab),
                 FragmentResults.class));
 
         // Add tabs to actionbar

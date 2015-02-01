@@ -33,4 +33,10 @@
     <string name="basicInformation">New poll basic information</string>
     <string name="options">Options of the poll</string>
     <string name="emptyOptionName">Empty option name</string>
+    <string name="chyba">Error!</string>
+    <string name="chyba1">All items are mandatory!</string>
+    <string name="chyba2">Option can not be empty!</string>
+    <string name="createtab">Create</string>
+    <string name="votetab">Vote</string>
+    <string name="resultstab">Results</string>
 </resources>
