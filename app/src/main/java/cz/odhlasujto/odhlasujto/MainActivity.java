@@ -28,20 +28,22 @@ import android.text.Spanned;
 import android.util.Log;
 import android.net.wifi.WifiManager;
 
-    import android.widget.ArrayAdapter;
-    import android.os.AsyncTask;
-    import org.json.JSONObject;
-    import org.json.JSONException;
-    import org.json.JSONArray;
-    import java.io.IOException;
-    import java.io.InputStream;
-    import java.net.HttpURLConnection;
-    import java.net.URL;
-    import java.io.InputStreamReader;
-    import java.io.Reader;
-    import java.util.ArrayList;
-    import java.util.Collections;
-    import java.util.Comparator;
+import android.widget.ArrayAdapter;
+import android.os.AsyncTask;
+
+import org.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONArray;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 // SharedPreferences
 import android.content.SharedPreferences;
@@ -85,8 +87,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         if (OnlineTool.isOnline()) {
             setContentView(R.layout.activity_main);
             Toast.makeText(this, "ZAŘÍZENÍ JE ONLINE!", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             setContentView(R.layout.activity_main);
             Toast.makeText(this, "ZAŘÍZENÍ NENÍ ONLINE!", Toast.LENGTH_SHORT).show();
         }
@@ -232,9 +233,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     @Override
     public void onTabSelected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }
+
     @Override
     public void onTabUnselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }
+
     @Override
     public void onTabReselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }//endregion
@@ -331,7 +334,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         Collections.sort(data, new Comparator<Poll>() {
             @Override
             public int compare(Poll s1, Poll s2) {
-    // TODO JEN NAMÁTKOU - SORT BUDE POTOM DLE SUMY A ID
+                // TODO JEN NAMÁTKOU - SORT BUDE POTOM DLE SUMY A ID
                 if (by.equals("pollDesc")) return s1.getPollDesc().compareTo(s2.getPollDesc());
                 else return s1.getPollName().compareTo(s2.getPollName());
                 //else /*if (by.equals("id"))*/ return (s1.getPollId() - s2.getPollId());
@@ -377,12 +380,14 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     }//endregion
 
     //region PLACEHOLDER FRAGMENT
+
     /**
      * Contains simple views
      */
     public static class PlaceholderFragment extends Fragment {
         public PlaceholderFragment() {
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -393,6 +398,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //endregion
 
     //region HYPERLINKS
+
     /**
      * Sets a hyperlink style to the textView.
      */

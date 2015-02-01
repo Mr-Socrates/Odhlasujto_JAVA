@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -62,7 +63,7 @@ public class db extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        Log.d(LOG, "Upgrading the database from version " + oldVersion + " to "+ newVersion);
+        Log.d(LOG, "Upgrading the database from version " + oldVersion + " to " + newVersion);
         // dropni
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_POLLS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OPTIONS);
@@ -169,7 +170,7 @@ public class db extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getOptions(){
+    public Cursor getOptions() {
         Cursor optionNamefromDB = null;
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = "SELECT _id, optionName FROM options";
@@ -190,41 +191,41 @@ public class db extends SQLiteOpenHelper {
     }
 
     //region AndroidDatabaseMANAGER
-    public ArrayList<Cursor> getData(String Query){
+    public ArrayList<Cursor> getData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String[] columns = new String[] { "mesage" };
+        String[] columns = new String[]{"mesage"};
         //an array list of cursor to save two cursors one has results from the query
         //other cursor stores error message if any errors are triggered
         ArrayList<Cursor> alc = new ArrayList<Cursor>(2);
-        MatrixCursor Cursor2= new MatrixCursor(columns);
+        MatrixCursor Cursor2 = new MatrixCursor(columns);
         alc.add(null);
         alc.add(null);
 
-        try{
-            String maxQuery = Query ;
+        try {
+            String maxQuery = Query;
             //execute the query results will be save in Cursor c
             Cursor c = sqlDB.rawQuery(maxQuery, null);
 
             //add value to cursor2
-            Cursor2.addRow(new Object[] { "Success" });
+            Cursor2.addRow(new Object[]{"Success"});
 
-            alc.set(1,Cursor2);
+            alc.set(1, Cursor2);
             if (null != c && c.getCount() > 0) {
 
-                alc.set(0,c);
+                alc.set(0, c);
                 c.moveToFirst();
 
-                return alc ;
+                return alc;
             }
             return alc;
-        } catch(Exception ex){
+        } catch (Exception ex) {
 
             Log.d("printing exception", ex.getMessage());
 
             //if any exceptions are triggered save the error message to cursor an return the arraylist
-            Cursor2.addRow(new Object[] { ""+ex.getMessage() });
-            alc.set(1,Cursor2);
+            Cursor2.addRow(new Object[]{"" + ex.getMessage()});
+            alc.set(1, Cursor2);
             return alc;
         }
     }//endregion
