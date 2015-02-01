@@ -333,8 +333,8 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
             public int compare(Poll s1, Poll s2) {
     // TODO JEN NAMÁTKOU - SORT BUDE POTOM DLE SUMY A ID
                 if (by.equals("pollDesc")) return s1.getPollDesc().compareTo(s2.getPollDesc());
-                else if (by.equals("pollName")) return s1.getPollName().compareTo(s2.getPollName());
-                else /*if (by.equals("id"))*/ return (s1.getPollId() - s2.getPollId());
+                else return s1.getPollName().compareTo(s2.getPollName());
+                //else /*if (by.equals("id"))*/ return (s1.getPollId() - s2.getPollId());
             }
         });
         return data;

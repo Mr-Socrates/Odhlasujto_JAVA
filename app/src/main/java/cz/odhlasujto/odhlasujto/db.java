@@ -25,25 +25,29 @@ import java.util.List;
 public class db extends SQLiteOpenHelper {
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
 
-    private static final int DATABASE_VERSION = 3;
-    private static final String DATABASE_NAME = "mydb";
+    private static final int DATABASE_VERSION = 6;
+    public static final String DATABASE_NAME = "mydb";
 
-    private static final String TABLE_POLLS = "polls";
-    private static final String COL_NAME_POLL = "pollName";
-    private static final String SQL_CREATE_POLLS =
+    public static final String TABLE_POLLS = "polls";
+    public static final String COL_NAME_POLL = "pollName";
+    public static final String POLL_ID = "pollId";
+    public static final String SQL_CREATE_POLLS =
             "CREATE TABLE " + TABLE_POLLS + " ("
-                    + COL_NAME_POLL + " TEXT, pollDesc TEXT,pollID INT);";
+                    + POLL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT "
+                    + COL_NAME_POLL + " TEXT, pollDesc TEXT, "
+                    + ");";
 
-    private static final String TABLE_OPTIONS = "options";
-    static final String COL_NAME_OPTION = "optionName";
-    static final String ID = "id";
-    static final String SUM = "sum";
-    private static final String SQL_CREATE_OPTIONS =
+    public static final String TABLE_OPTIONS = "options";
+    public static final String COL_NAME_OPTION = "optionName";
+    public static final String ID = "_id";
+    public static final String SUM = "sum";
+    public static final String SQL_CREATE_OPTIONS =
             "CREATE TABLE " + TABLE_OPTIONS + " ("
                     + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COL_NAME_OPTION + " TEXT NOT NULL, "
                     + SUM + " INTEGER "
                     + ");";
+
 
     public db(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -72,7 +76,7 @@ public class db extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(COL_NAME_POLL, poll.getPollName());
             values.put("pollDesc", poll.getPollDesc());
-            values.put("pollID", poll.getPollId());
+            values.put("pollId", poll.getPollId());
             getWritableDatabase().insert(TABLE_POLLS, null, values);
         }
     }
@@ -84,7 +88,7 @@ public class db extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Poll poll = new Poll();
-                poll.setPollId(cursor.getInt(Integer.valueOf(cursor.getColumnIndex("pollId"))));
+                poll.setPollId(cursor.getString(Integer.valueOf(cursor.getColumnIndex("pollId"))));
                 poll.setPollName(cursor.getString(Integer.valueOf(cursor.getColumnIndex(COL_NAME_POLL))));
                 poll.setPollDesc(cursor.getString(Integer.valueOf(cursor.getColumnIndex("pollDesc"))));
                 // Adding poll to list
@@ -168,7 +172,7 @@ public class db extends SQLiteOpenHelper {
     public Cursor getOptions(){
         Cursor optionNamefromDB = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM options";
+        String selectQuery = "SELECT _id, optionName FROM options";
         //String selectQuery = "SELECT " + COL_NAME_POLL + " FROM " + TABLE_POLLS;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor != null && cursor.getCount() > 0) {

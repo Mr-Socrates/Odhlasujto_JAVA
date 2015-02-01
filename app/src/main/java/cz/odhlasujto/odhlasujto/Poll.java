@@ -1,7 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
 public class Poll {
-    private int pollId;
+    private String pollId;
     private String pollName;
     private String pollDesc;
     private int SUM;
@@ -10,11 +10,11 @@ public class Poll {
 
     }
 
-    public int getPollId() {
+    public String getPollId() {
         return this.pollId;
     }
 
-    public void setPollId(int pollId) {
+    public void setPollId(String pollId) {
         this.pollId = pollId;
     }
 

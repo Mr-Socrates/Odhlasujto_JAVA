@@ -35,8 +35,6 @@ public class FragmentVote extends SherlockFragment {
     SherlockFragment fragment;
     public android.support.v4.app.FragmentManager fragmentManager;
     android.support.v4.app.FragmentTransaction fragmentTransaction;
-    String options = "options";
-    private List optionNames;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,8 +47,6 @@ public class FragmentVote extends SherlockFragment {
         ListView textOPTION = (ListView) view.findViewById(R.id.listOption);
         SimpleCursorAdapter dataAdapter;
 
-        optionNames = new ArrayList();
-
         db db = new db(getActivity().getApplicationContext());
 
         String dataName = db.getPollName();
@@ -59,24 +55,16 @@ public class FragmentVote extends SherlockFragment {
         textNAME.setText(dataName);
         textDESC.setText(dataDesc);
 
-        final ArrayList<String> list = new ArrayList<String>();
+        //final ArrayList<String> list = new ArrayList<String>();
         //ArrayAdapter<String> adapter;
 
         Cursor cursor = db.getOptions();
 
-        String from [] = new String[]{db.ID};
-        int to [] = new int[] {R.id.textT};
+        String[] from = new String[]{db.COL_NAME_OPTION};
+        int[] to = new int[]{R.id.name_option};
 
-        while(cursor.moveToNext()) {
-            dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
-            textOPTION.setAdapter(dataAdapter);
-        }
-        while(cursor.moveToNext()) {
-
-            Log.d(LOG, cursor.getString(cursor.getColumnIndex("optionName")));
-
-        }
-
+        dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
+        textOPTION.setAdapter(dataAdapter);
 
 //        submitVote.setOnClickListener(new View.OnClickListener() {
 //            @Override
