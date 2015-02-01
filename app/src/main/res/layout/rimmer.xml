@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="43dp"
     android:orientation="vertical"
-    android:padding="6dip" >
+    android:padding="8dip" >
 
 
     <TextView
-        android:text="New Text"
+        android:text="@string/optionFlatus"
         android:id="@+id/name_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:gravity="center_vertical"
-        android:textColor="@android:color/black"/>
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:paddingLeft="20dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -25,8 +27,7 @@
         android:button="@drawable/custom_checkbox"
         android:layout_alignRight="@+id/name_option"
         android:layout_alignEnd="@+id/name_option"
-        android:layout_marginRight="63dp"
-        android:layout_marginEnd="63dp" />
-
+        android:nestedScrollingEnabled="false"
+        android:paddingRight="21dp" />
 
 </RelativeLayout>

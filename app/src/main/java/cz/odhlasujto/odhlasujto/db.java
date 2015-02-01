@@ -1,5 +1,6 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,7 +19,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -52,7 +55,7 @@ public class db extends SQLiteOpenHelper {
                     + COL_NAME_OPTION + " TEXT NOT NULL, "
                     + SUM + " INTEGER, "
                     + CREATED_POLL + " integer, "
-                    + "FOREIGN KEY ("+CREATED_POLL+") REFERENCES "+TABLE_POLLS+" ("+POLL_ID+"));";
+                    + "FOREIGN KEY ("+CREATED_POLL+") REFERENCES "+TABLE_POLLS+" ("+POLL_ID+") ON DELETE CASCADE);";
 
     public db(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -75,9 +78,24 @@ public class db extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    @Override
+    public void onOpen(SQLiteDatabase db){
+        super.onOpen(db);
+        db.setForeignKeyConstraintsEnabled(true);
+        if (!db.isReadOnly()) {
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    public void onConfigure(SQLiteDatabase db){
+
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
     public void insertPolls(ArrayList<Poll> polls) {
         for (Poll poll : polls) {
-            // použití čistého SQL dotazu by bylo rychlejší, zvláště u velkých objemů dat
             ContentValues values = new ContentValues();
             values.put(COL_NAME_POLL, poll.getPollName());
             values.put("pollDesc", poll.getPollDesc());
@@ -158,37 +176,38 @@ public class db extends SQLiteOpenHelper {
             {
                 cursor.moveToFirst();
                 do {
-                    pollDescfromDB = cursor.getString(0);
+                   pollDescfromDB = cursor.getString(0);
                 } while (cursor.moveToNext());
             }
         }
         return pollDescfromDB;
     }
 
+    public String getPollId() {
+        String pollIdfromDB = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "SELECT pollId FROM polls ORDER BY pollId DESC LIMIT 1";
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            {
+                cursor.moveToFirst();
+                do {
+                    pollIdfromDB = cursor.getString(0);
+                } while (cursor.moveToNext());
+            }
+        }
+        return pollIdfromDB;
+    }
+
     public void insertOption(ArrayList<Options> options) {
+
         for (Options option : options) {
-            // použití čistého SQL dotazu by bylo rychlejší, zvláště u velkých objemů dat
+
             ContentValues values = new ContentValues();
             SQLiteDatabase db = this.getReadableDatabase();
 
             values.put(COL_NAME_OPTION, option.getOptionName());
-            //values.put(CREATED_POLL, valueOf(db.rawQuery("SELECT pollId FROM polls", null)));
-            Cursor createdPoll = null;
-            Cursor c = db.rawQuery("SELECT pollId FROM polls ORDER BY pollId DESC LIMIT 1", null);
-            //values.put(CREATED_POLL, valueOf(c));
-            Log.d("XXXXXX", DatabaseUtils.dumpCursorToString(c));
-
-
-            if (c != null && c.getCount() > 0) {
-                {
-                    c.moveToFirst();
-                    do {
-                        createdPoll = c;
-                        Log.d(LOG, "CP: " + createdPoll.getString(0));
-                    } while (c.moveToNext());
-                }
-            }
-            Log.d("XXXXXX", DatabaseUtils.dumpCursorToString(c));
+            values.put(CREATED_POLL, getPollId());
 
             getWritableDatabase().insert(TABLE_OPTIONS, null, values);
         }
@@ -218,7 +237,7 @@ public class db extends SQLiteOpenHelper {
     public ArrayList<Cursor> getData(String Query) {
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String[] columns = new String[]{"mesage"};ß
+        String[] columns = new String[]{"mesage"};
         //an array list of cursor to save two cursors one has results from the query
         //other cursor stores error message if any errors are triggered
         ArrayList<Cursor> alc = new ArrayList<Cursor>(2);

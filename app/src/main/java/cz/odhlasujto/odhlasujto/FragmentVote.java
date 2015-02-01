@@ -1,6 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -41,19 +42,24 @@ public class FragmentVote extends SherlockFragment {
 
         final View view = inflater.inflate(R.layout.vote, container, false);
 
+        db db = new db(getActivity().getApplicationContext());
+
         final Button submitVote = (Button) view.findViewById(R.id.btnSubmitVote);
+
+        //region GET n SET PollName /\ PollDesc
         TextView textNAME = (TextView) view.findViewById(R.id.pollNameID);
         TextView textDESC = (TextView) view.findViewById(R.id.pollDescID);
-        ListView textOPTION = (ListView) view.findViewById(R.id.listOption);
-        SimpleCursorAdapter dataAdapter;
-
-        db db = new db(getActivity().getApplicationContext());
 
         String dataName = db.getPollName();
         String dataDesc = db.getPollDesc();
 
         textNAME.setText(dataName);
         textDESC.setText(dataDesc);
+        //endregion
+
+        //region Plnění Listu Možnostmi a Checkboxy na hlasy
+        final ListView textOPTION = (ListView) view.findViewById(R.id.listOption);
+        SimpleCursorAdapter dataAdapter;
 
         //final ArrayList<String> list = new ArrayList<String>();
         //ArrayAdapter<String> adapter;
@@ -66,9 +72,21 @@ public class FragmentVote extends SherlockFragment {
         dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
         textOPTION.setAdapter(dataAdapter);
 
-//        submitVote.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+        Log.v("DUMP CURSOR[getOptions]", DatabaseUtils.dumpCursorToString(cursor));
+        Toast.makeText(getActivity().getApplicationContext(), "textOPTION:  " +textOPTION, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(), "COUNT of List ITEMS:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition:  " +textOPTION.getCheckedItemPosition(), Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition2:  " +textOPTION.getCheckedItemPosition(), Toast.LENGTH_SHORT).show();
+        //endregion
+
+        submitVote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(), "txt Option:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "COUNT of List ITEMS:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "getChecked:  " +textOPTION.getCheckedItemPosition(), Toast.LENGTH_SHORT).show();
 ////              FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
 //                Log.d(LOG, "Clicked on Submit Poll: declaration");
 //
@@ -84,8 +102,8 @@ public class FragmentVote extends SherlockFragment {
 //                Log.d(LOG, "Clicked on Submit Poll: commited");
 ////                View view = inflater.inflate(R.layout.vote, container, false);
 ////                Log.d(LOG, "Clicked on Submit POLL Btn");
-//            }
-//        });
+            }
+        });
         db.close();
         return view;
     }

@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:fillViewport="true">
-
-    <RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fillViewport="true">
 
         <Button
             android:visibility="gone"
@@ -18,7 +13,7 @@
             android:id="@+id/btnDownload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Download JSON"
+            android:text="@string/btnDownloadJSON"
             android:textSize="7sp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
@@ -31,44 +26,52 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:textSize="18sp"
-            android:layout_alignParentTop="true" />
+            android:layout_marginTop="25dp"
+            android:textSize="13sp"
+            android:textStyle="italic"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/voteDesc"
             android:id="@+id/votePollDesc"
-            android:textSize="18sp"
+            android:textSize="13sp"
+            android:textStyle="italic"
+
+            android:gravity="left"
+            android:layout_marginTop="39dp"
             android:layout_below="@+id/votePollName"
             android:layout_alignLeft="@+id/votePollName"
-            android:layout_alignStart="@+id/votePollName" />
+            android:layout_alignStart="@+id/votePollName"/>
 
         <!--views for showing poll info-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pollNameID"
-            android:text="Testové hlasování"
+            android:text="@string/lore2"
             android:textSize="18sp"
-            android:layout_above="@+id/pollDescID"
-            android:layout_toRightOf="@+id/votePollDesc"
-            android:layout_toEndOf="@+id/votePollDesc"
-            android:layout_marginLeft="33dp"
-            android:layout_marginStart="33dp"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="gravity"
+
+            android:gravity="right"
+            android:layout_below="@+id/votePollName"
+            android:layout_alignLeft="@+id/votePollDesc"
+            android:layout_alignStart="@+id/votePollDesc"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/pollDescID"
             android:textSize="18sp"
-            android:text="Lore ipsum"
-            android:layout_alignTop="@+id/votePollDesc"
-            android:layout_alignRight="@+id/pollNameID"
-            android:layout_alignEnd="@+id/pollNameID"
-            android:textAlignment="viewEnd" />
+            android:text="@string/lore"
+            android:textAlignment="gravity"
+
+            android:gravity="right"
+            android:elegantTextHeight="true"
+            android:layout_below="@+id/votePollDesc"
+            android:layout_alignLeft="@+id/votePollDesc"
+            android:layout_alignStart="@+id/votePollDesc" />
 
         <!--layout for showing poll options | example-->
         <ListView
@@ -78,7 +81,7 @@
             android:layout_below="@+id/pollDescID"
             android:layout_above="@+id/btnSubmitVote"
             android:gravity="start"
-
+            android:textSize="18sp"
 
             android:fastScrollEnabled="true"
             android:fastScrollAlwaysVisible="true"
@@ -89,7 +92,14 @@
             android:scrollingCache="true"
 
             android:headerDividersEnabled="true"
-            android:footerDividersEnabled="true"/>
+            android:footerDividersEnabled="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="0dp"
+            android:layout_alignParentEnd="false"
+            android:clickable="true"
+            android:layout_margin="1dp"
+            android:paddingTop="22dp"
+            android:contentDescription="sadasdasdas" />
 
         <Button
             android:id="@+id/btnSubmitVote"
@@ -99,6 +109,4 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

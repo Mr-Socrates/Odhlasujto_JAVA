@@ -16,8 +16,8 @@
     <string name="poll_desc_hint">Popis hlasování</string>
     <string name="hintTxtItem">Vložte možnosti hlasování</string>
     <string name="lblBtnAdd">Vložte položku</string>
-    <string name="voteName">Název hlasování:</string>
-    <string name="voteDesc">Popis hlasování:</string>
+    <string name="voteName">Název hlasování</string>
+    <string name="voteDesc">Popis hlasování</string>
     <string name="vote">Hlasuj</string>
 
     <string name="submit_vote">Ulož hlas</string>
@@ -31,4 +31,8 @@
     <string name="basicInformation">Basic information</string>
     <string name="options">Options of the poll</string>
     <string name="emptyOptionName">Enpty option name</string>
+    <string name="lore">Lore ipsum</string>
+    <string name="lore2">Testové hlasování</string>
+    <string name="optionFlatus">Option 1</string>
+    <string name="btnDownloadJSON">Download JSON</string>
 </resources>

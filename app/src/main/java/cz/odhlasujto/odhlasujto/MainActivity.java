@@ -86,10 +86,10 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         OnlineTool.setContext(this.getApplicationContext());
         if (OnlineTool.isOnline()) {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this, "ZAŘÍZENÍ JE ONLINE!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Zařízení je online.", Toast.LENGTH_SHORT).show();
         } else {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this, "ZAŘÍZENÍ NENÍ ONLINE!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Zařízení je offline.", Toast.LENGTH_SHORT).show();
         }
 
 //      //TODO PLACEHOLDER FRAGMENT - find out if its needed
@@ -100,7 +100,8 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //        }
 
         db db = new db(this);
-        db.getWritableDatabase().delete("polls", null, null);
+        //VYMAZÁNÍ DB pro zkoušku ON DELETE CASCADE
+        //db.getWritableDatabase().delete("polls", null, null);
 
         Button btnDownload = (Button) findViewById(R.id.btnDownload);
         /*btnDownload.setOnClickListener (new OnClickListener() {

@@ -82,9 +82,7 @@ public class FragmentCreate extends SherlockFragment {
                 Toast.makeText(getActivity().getApplicationContext(), "Poll name: " +ziskanePollName + "\n Poll desc: " +ziskanePollDesc, Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity().getApplicationContext(), "Options:  " +list, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getActivity().getApplicationContext(), "All polls: " + db.getAllPolls(), Toast.LENGTH_LONG).show();
-                Toast.makeText(getActivity().getApplicationContext(), "newPollArrayL: " + newPollArrayL, Toast.LENGTH_LONG).show();
-                Log.d("newPollArrayL", String.valueOf(newPollArrayL));
+                //Log.d("newPollArrayL", String.valueOf(newPollArrayL));
 
                 //region CALLING VOTE FRAGMENT from Save poll btn)
                 /*FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(R.id.fragment1); //scroll view of create_poll.XML
@@ -121,7 +119,6 @@ public class FragmentCreate extends SherlockFragment {
                       getActivity().getApplicationContext(),
                       R.layout.listview_item_create_option,
                       list));
-                //Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
 
                 String ziskaneOptionName = option.getText().toString();
 
@@ -149,5 +146,4 @@ public class FragmentCreate extends SherlockFragment {
         db newDB = new db(getActivity().getApplicationContext());
         SQLiteDatabase sqliteDatabase = newDB.getWritableDatabase();
         } //endregion
-
 }
