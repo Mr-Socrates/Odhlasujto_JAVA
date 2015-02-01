@@ -79,7 +79,18 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+
+        OnlineTool.setContext(this.getApplicationContext());
+        if (OnlineTool.isOnline()) {
+            setContentView(R.layout.activity_main);
+            Toast.makeText(this, "ZAŘÍZENÍ JE ONLINE!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            setContentView(R.layout.activity_main);
+            Toast.makeText(this, "ZAŘÍZENÍ NENÍ ONLINE!", Toast.LENGTH_SHORT).show();
+        }
+
 //      //TODO PLACEHOLDER FRAGMENT - find out if its needed
 //      if (savedInstanceState == null) {
 //            getFragmentManager().beginTransaction()
