@@ -39,4 +39,7 @@
     <string name="createtab">Create</string>
     <string name="votetab">Vote</string>
     <string name="resultstab">Results</string>
+    <string name="oznameni">Information</string>
+    <string name="oznameni1">Device is online!</string>
+    <string name="oznameni2">Device is not online!</string>
 </resources>

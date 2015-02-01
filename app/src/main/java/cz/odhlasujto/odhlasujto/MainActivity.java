@@ -1,5 +1,7 @@
 package cz.odhlasujto.odhlasujto;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;  //used in Menus
 import android.app.Fragment;
@@ -86,10 +88,28 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         OnlineTool.setContext(this.getApplicationContext());
         if (OnlineTool.isOnline()) {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this, "ZAŘÍZENÍ JE ONLINE!", Toast.LENGTH_SHORT).show();
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle(getString(R.string.oznameni));
+            alertDialog.setMessage(getString(R.string.oznameni1));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         } else {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this, "ZAŘÍZENÍ NENÍ ONLINE!", Toast.LENGTH_SHORT).show();
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle(getString(R.string.oznameni));
+            alertDialog.setMessage(getString(R.string.oznameni2));
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
 
 //      //TODO PLACEHOLDER FRAGMENT - find out if its needed

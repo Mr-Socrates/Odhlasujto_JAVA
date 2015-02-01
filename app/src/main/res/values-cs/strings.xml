@@ -37,4 +37,7 @@
     <string name="createtab">Vytvořit</string>
     <string name="votetab">Hlasovat</string>
     <string name="resultstab">Výsledky</string>
+    <string name="oznameni">Oznámení</string>
+    <string name="oznameni1">Zařízení je online!</string>
+    <string name="oznameni2">Zařízení není online!</string>
 </resources>
