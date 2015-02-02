@@ -4,10 +4,8 @@ public class Poll {
     public String pollId;
     private String pollName;
     private String pollDesc;
-    private int SUM;
 
     public Poll() {
-
     }
 
     public String getPollId() {
@@ -32,14 +30,6 @@ public class Poll {
 
     public void setPollDesc(String pollDesc) {
         this.pollDesc = pollDesc;
-    }
-
-    public int getSUM() {
-        return this.SUM;
-    }
-
-    public void setSUM(int SUM) {
-        this.SUM = SUM;
     }
 
     public String toString() {

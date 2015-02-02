@@ -7,16 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.CheckBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Martin on 29.01.15.
- */
 public class AdapterOptions extends BaseAdapter {
 
     FragmentActivity activity;
+    Context context = activity.getApplicationContext();
     List<Options> data = new ArrayList<Options>();
 
     public AdapterOptions(FragmentActivity activity, List<Options> data) {
@@ -45,15 +44,21 @@ public class AdapterOptions extends BaseAdapter {
     }
 
     public View fillView(int i) {
-        Context context = activity.getApplicationContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
 
+        LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = null;
         view = inflater.inflate(R.layout.rimmer, null);
-        TextView t3 = (TextView) view.findViewById(R.id.optionNameMUSTR);
-        t3.setText(data.get(i).getOptionName());
 
+        TextView t1 = (TextView) view.findViewById(R.id.name_option);
+        t1.setText(data.get(i).getOptionName());
+
+        CheckBox cbVote = (CheckBox) view.findViewById(R.id.checkBoxVote);
+        cbVote.setChecked(true);
+//          if (data.get(i).getSUM() == 1)
+//              cbVote.setChecked(true);
+//              else
+//              cbVote.setChecked(false);
         return view;
     }
 }

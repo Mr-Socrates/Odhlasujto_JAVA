@@ -1,40 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="43dp"
+    android:orientation="vertical"
+    android:padding="8dip" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/name_option"
+        android:text="@string/optionFlatus"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pollIdMUSTR"
-        android:layout_marginLeft="10dp"/>
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:minHeight="?android:attr/listPreferredItemHeightSmall"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:paddingLeft="20dp" />
 
-    <TextView
+    <CheckBox
+        android:id="@+id/checkBoxResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pollNameMUSTR"
-        android:layout_marginLeft="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/pollDescMUSTR"
-        android:layout_marginLeft="10dp"/>
+        android:checked="false"
+        android:layout_centerVertical="true"
+        android:button="@drawable/custom_checkbox"
+        android:layout_alignRight="@+id/name_option"
+        android:layout_alignEnd="@+id/name_option"
+        android:nestedScrollingEnabled="false"
+        android:paddingRight="21dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/optionNameMUSTR"
-        android:layout_marginLeft="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/SUMMUSTR"
-        android:layout_marginLeft="10dp"/>
-</LinearLayout>
+</RelativeLayout>

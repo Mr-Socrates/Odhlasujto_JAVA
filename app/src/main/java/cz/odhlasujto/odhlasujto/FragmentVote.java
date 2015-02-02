@@ -25,7 +25,6 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragment;
 
 import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,14 +70,11 @@ public class FragmentVote extends SherlockFragment {
 
         dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
         textOPTION.setAdapter(dataAdapter);
-
+        //Toast.makeText(getActivity(). getApplicationContext(), "COUNT of List ITEMS:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
         Log.v("DUMP CURSOR[getOptions]", DatabaseUtils.dumpCursorToString(cursor));
-        Toast.makeText(getActivity().getApplicationContext(), "textOPTION:  " +textOPTION, Toast.LENGTH_LONG).show();
-        Toast.makeText(getActivity().getApplicationContext(), "COUNT of List ITEMS:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
-
-        Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition:  " +textOPTION.getCheckedItemPosition(), Toast.LENGTH_SHORT).show();
-
-        Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition2:  " +textOPTION.getCheckedItemPosition(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition:  " +textOPTION.getCheckedItemPositions(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "CheckedItem COUNT:  " +textOPTION.getCheckedItemCount(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), "CheckedItem IDs:  " +textOPTION.getCheckedItemIds(), Toast.LENGTH_SHORT).show();
         //endregion
 
         submitVote.setOnClickListener(new View.OnClickListener() {

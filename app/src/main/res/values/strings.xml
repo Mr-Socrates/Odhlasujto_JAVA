@@ -46,4 +46,7 @@
     <string name="lore2">Testové hlasování</string>
     <string name="optionFlatus">Option 1</string>
     <string name="btnDownloadJSON">Download JSON</string>
+    <string name="pollResults">Results of the poll</string>
+    <string name="btnSQLite">View database</string>
+
 </resources>

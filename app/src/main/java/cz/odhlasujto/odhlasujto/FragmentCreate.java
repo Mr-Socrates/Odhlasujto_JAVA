@@ -3,7 +3,6 @@ package cz.odhlasujto.odhlasujto;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.app.Activity;
@@ -54,7 +53,7 @@ public class FragmentCreate extends SherlockFragment {
         final EditText pollName = (EditText) view.findViewById(R.id.pollName);
         final EditText pollDesc = (EditText) view.findViewById(R.id.pollDesc);
 
-        // Instance ArrayListu & deklarace ArrayAdapteru
+        // Instanciace ArrayListu & deklarace ArrayAdapteru
         final ArrayList<String> list = new ArrayList<String>();
         ArrayAdapter<String> adapter;
 
@@ -100,24 +99,7 @@ public class FragmentCreate extends SherlockFragment {
                     Toast.makeText(getActivity().getApplicationContext(), "Options:  " + list, Toast.LENGTH_SHORT).show();
                     //Log.d("newPollArrayL", String.valueOf(newPollArrayL));
 
-                    Toast.makeText(getActivity().getApplicationContext(), "All polls: " + db.getAllPolls(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(getActivity().getApplicationContext(), "newPollArrayL: " + newPollArrayL, Toast.LENGTH_LONG).show();
-                    Log.d("newPollArrayL", String.valueOf(newPollArrayL));
-
-                    //region CALLING VOTE FRAGMENT from Save poll btn)
-                /*FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(R.id.fragment1); //scroll view of create_poll.XML
-                fragmentCreateLayout.removeAllViews();
-                Log.d(LOG, "Clicked on Submit Poll: remove fragment view");
-
-                fragment = new FragmentVote();
-                Log.d(LOG, "Clicked on Submit Poll: called fragment VOTE");
-                fragmentManager = getFragmentManager();
-
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();*/
-                    //endregion
+                     //endregion
                 }
             }
         });//endregion
@@ -133,9 +115,6 @@ public class FragmentCreate extends SherlockFragment {
                 // This is the array adapter, it takes the context of the activity as a
                 // first parameter, the type of list view as a second parameter and your
                 // array as a third parameter.
-
-                //Toast.makeText(getActivity().getApplicationContext(), "Option:  " +option.getText().toString() +"  created.", Toast.LENGTH_SHORT).show();
-
 
                 if (option.getText().toString().isEmpty()) {
                     AlertDialog alertDialog = new AlertDialog.Builder(FragmentCreate.this.getActivity().getWindow().getContext()).create();
@@ -168,10 +147,8 @@ public class FragmentCreate extends SherlockFragment {
                     db.insertOption(newOptionArrayL);
 
                     Toast.makeText(getActivity().getApplicationContext(), "Option:  " + ziskaneOptionName + " created.", Toast.LENGTH_SHORT).show();
-
                     option.setText("");
                     //adapter.notifyDataSetChanged()
-
                 }
             }
 

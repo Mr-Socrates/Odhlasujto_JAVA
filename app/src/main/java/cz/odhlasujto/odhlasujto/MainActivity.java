@@ -8,29 +8,18 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
-import android.content.Context;
-import android.content.Intent;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import android.text.style.URLSpan;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.util.Log;
-import android.net.wifi.WifiManager;
 
-import android.widget.ArrayAdapter;
 import android.os.AsyncTask;
 
 import org.json.JSONObject;
@@ -50,23 +39,14 @@ import java.util.Comparator;
 // SharedPreferences
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 
 //Animations -9OLD Androids
-import com.nineoldandroids.animation.AnimatorSet;
 
 // Sherlock ActionBars lib
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
-import com.actionbarsherlock.app.*;
 
 public class MainActivity extends SherlockFragmentActivity implements TabListener {
 
@@ -85,10 +65,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
-        OnlineTool.setContext(this.getApplicationContext());
-        if (OnlineTool.isOnline()) {
+        InternetStatus.setContext(this.getApplicationContext());
+        if (InternetStatus.isOnline()) {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this, "Zařízení je online.", Toast.LENGTH_SHORT).show();
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle(getString(R.string.oznameni));
             alertDialog.setMessage(getString(R.string.oznameni1));
@@ -101,7 +80,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
             alertDialog.show();
         } else {
             setContentView(R.layout.activity_main);
-            Toast.makeText(this, "Zařízení je offline.", Toast.LENGTH_SHORT).show();
             AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
             alertDialog.setTitle(getString(R.string.oznameni));
             alertDialog.setMessage(getString(R.string.oznameni2));
@@ -348,16 +326,16 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         db.close();// neplýtváme prostředky
         Adapter adapter = new Adapter(this, dataOrdered);
 
-        ListView v = (ListView) findViewById(R.id.listView);
+        ListView v = (ListView) findViewById(R.id.listResults);
         v.setAdapter(adapter);
     }
 
     // SORTED ARRAY
+    // SORT MÚŽE BÝT POTOM DLE SUMY A ID (relevantní?)
     private ArrayList<Poll> order(ArrayList<Poll> data, final String by) {
         Collections.sort(data, new Comparator<Poll>() {
             @Override
             public int compare(Poll s1, Poll s2) {
-                // TODO JEN NAMÁTKOU - SORT BUDE POTOM DLE SUMY A ID
                 if (by.equals("pollDesc")) return s1.getPollDesc().compareTo(s2.getPollDesc());
                 else return s1.getPollName().compareTo(s2.getPollName());
                 //else /*if (by.equals("id"))*/ return (s1.getPollId() - s2.getPollId());

@@ -44,7 +44,6 @@
             android:layout_alignLeft="@+id/votePollName"
             android:layout_alignStart="@+id/votePollName"/>
 
-        <!--views for showing poll info-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,12 +72,23 @@
             android:layout_alignLeft="@+id/votePollDesc"
             android:layout_alignStart="@+id/votePollDesc" />
 
-        <!--layout for showing poll options | example-->
-        <ListView
+        <TextView
+            android:id="@+id/optionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/options"
+            android:textSize="14sp"
+
+            android:layout_marginTop="18dp"
+            android:layout_below="@+id/pollDescID"
+            android:layout_alignLeft="@+id/pollDescID"
+            android:layout_alignStart="@+id/pollDescID" />
+
+    <ListView
             android:id="@+id/listOption"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pollDescID"
+            android:layout_below="@+id/optionName"
             android:layout_above="@+id/btnSubmitVote"
             android:gravity="start"
             android:textSize="18sp"
@@ -98,8 +108,7 @@
             android:layout_alignParentEnd="false"
             android:clickable="true"
             android:layout_margin="1dp"
-            android:paddingTop="22dp"
-            android:contentDescription="sadasdasdas" />
+            android:layout_marginTop="22dp"/>
 
         <Button
             android:id="@+id/btnSubmitVote"

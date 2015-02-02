@@ -24,3 +24,6 @@ This folder contains list of main used technologies and corresponding steps to g
 
 ### Input Methods and visibility of keyboard on inputs
 : https://developer.android.com/training/keyboard-input/visibility.html
+
+### CheckBoxes in ListView
+: http://techlovejump.com/android-listview-with-checkbox/

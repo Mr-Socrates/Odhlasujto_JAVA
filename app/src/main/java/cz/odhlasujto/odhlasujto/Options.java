@@ -4,9 +4,9 @@ public class Options {
     private int optionID;
     private String optionName;
     private int createdPoll;
+    private int SUM;
 
     public Options() {
-
     }
 
     public int getOptionID() {
@@ -21,6 +21,13 @@ public class Options {
         this.createdPoll = createdPoll;
     }
 
+    public int getSUM() {
+        return this.SUM;
+    }
+
+    public void setSUM(int SUM) {
+        this.SUM = SUM;
+    }
 
     public String getOptionName() {
         return this.optionName;

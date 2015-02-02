@@ -141,13 +141,10 @@ public class db extends SQLiteOpenHelper {
                 poll.setPollName(cursor.getString(0));
                 poll.setPollDesc(cursor.getString(1));
 
-                // Add book to books
                 polls.add(poll);
             } while (cursor.moveToNext());
         }
-
         Log.d("getAllPolls()", polls.toString());
-        // return books
         return polls;
     }
 
@@ -208,6 +205,7 @@ public class db extends SQLiteOpenHelper {
 
             values.put(COL_NAME_OPTION, option.getOptionName());
             values.put(CREATED_POLL, getPollId());
+values.put(SUM, option.getSUM());
 
             getWritableDatabase().insert(TABLE_OPTIONS, null, values);
         }
@@ -216,7 +214,7 @@ public class db extends SQLiteOpenHelper {
     public Cursor getOptions() {
         Cursor optionNamefromDB = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT _id, optionName FROM polls, options WHERE polls.pollId = options.createdPoll";
+String selectQuery = "SELECT _id, optionName, sum FROM polls, options WHERE polls.pollId = options.createdPoll";
         //String selectQuery = "SELECT " + COL_NAME_POLL + " FROM " + TABLE_POLLS;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor != null && cursor.getCount() > 0) {
