@@ -8,10 +8,13 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -43,18 +46,22 @@ import android.preference.PreferenceManager;
 //Animations -9OLD Androids
 
 // Sherlock ActionBars lib
+import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.ActionBar.TabListener;
 
+import cz.odhlasujto.odhlasujto.Adapters.Adapter;
+import cz.odhlasujto.odhlasujto.Models.Poll;
+
 public class MainActivity extends SherlockFragmentActivity implements TabListener {
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
     public static final String PREFS_NAME = "MyPrefsFile";
-    Fragment fragment;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+    SherlockFragment fragment;
+    android.support.v4.app.FragmentManager fragmentManager;
+    android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     private final Handler handler = new Handler();
     ActionBar.Tab TabCreate, TabVote, TabResults;
@@ -63,8 +70,8 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
 
+        //region VALIDACE & Inernet connection status
         InternetStatus.setContext(this.getApplicationContext());
         if (InternetStatus.isOnline()) {
             setContentView(R.layout.activity_main);
@@ -90,14 +97,14 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                         }
                     });
             alertDialog.show();
-        }
+        }//endregion
 
-//      //TODO PLACEHOLDER FRAGMENT - find out if its needed
-//      if (savedInstanceState == null) {
-//            getFragmentManager().beginTransaction()
-//                    .add(R.id.container, new PlaceholderFragment())
-//                    .commit();
-//        }
+      //region Retrieving onSaveInstanceState(Bundle) - only for dynamic data
+      if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new PlaceholderFragment())
+                    .commit();
+        }//endregion
 
         db db = new db(this);
         //VYMAZÁNÍ DB pro zkoušku ON DELETE CASCADE
@@ -137,66 +144,62 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
         actionBar.addTab(TabVote);
         actionBar.addTab(TabResults);
         actionBar.selectTab(TabCreate);
+
+        if (savedInstanceState != null) {
+            actionBar.setSelectedNavigationItem(savedInstanceState.getInt("tab", 0));
+        }
         //endregion
 
         //region CALLING FRAGMENTS from OnClicks (redundant)
-        /*
-        Button createPoll = (Button) findViewById(R.id.create);
-        Button vote = (Button) findViewById(R.id.vote);
-        Button results = (Button) findViewById(R.id.results);
+//        Button createPoll = (Button) findViewById(R.id.btnSubmitVote);
+//
+//        createPoll.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(LOG, "CLICKED ON BTN VOTE - 0");
+//                LinearLayout fragmentCreateLayout = (LinearLayout) findViewById(R.id.fragment1);
+//                fragmentCreateLayout.removeAllViews();
+//
+//                fragment = new FragmentVote();
+//                fragmentManager = getSupportFragmentManager();
+//                Log.d(LOG, "CLICKED ON BTN VOTE - 1");
+//                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment, getString(R.string.createtab));
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//            }
+//        });
 
-        createPoll.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        vote.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(LOG, "Clicked on Vote Btn");
+//                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+//                activityMainLayout.removeAllViews();
+//                fragment = new FragmentVote();
+//                fragmentManager = getFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.container, fragment);
+//                fragmentTransaction.commit();
+////            }
+//        });
+//
+//        results.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
+//                activityMainLayout.removeAllViews();
+//                fragment = new FragmentResults();
+//                fragmentManager = getFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.add(R.id.container, fragment);
+//                fragmentTransaction.commit();
+//                Log.d(LOG, "Clicked on Results Btn");
+//            }
+//        });
 
-                    Log.d(LOG, "Clicked on CreatePoll Btn - 0 state");
-                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
-                    Log.d(LOG, "Clicked on CreatePoll Btn - declaration");
-                activityMainLayout.removeAllViews();
-                    Log.d(LOG, "Clicked on CreatePoll Btn - removeallViews");
-                fragment = new FragmentCreate();
-                    Log.d(LOG, "Clicked on CreatePoll Btn - create Frag");
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                    Log.d(LOG, "Clicked on CreatePoll Btn - transaction");
-                fragmentTransaction.add(R.id.container, fragment);
-                fragmentTransaction.commit();
-                    Log.d(LOG, "Clicked on CreatePoll Btn");
-            }
-        });
-
-        vote.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(LOG, "Clicked on Vote Btn");
-                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
-                activityMainLayout.removeAllViews();
-                fragment = new FragmentVote();
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.container, fragment);
-                fragmentTransaction.commit();
-
-            }
-        });
-
-        results.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
-                activityMainLayout.removeAllViews();
-                fragment = new FragmentResults();
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.container, fragment);
-                fragmentTransaction.commit();
-                Log.d(LOG, "Clicked on Results Btn");
-            }
-        });
-        */
-//endregion
-
+    //endregion
     }
 
     //region OPTIONS MENU | Canvas Menu
@@ -228,22 +231,20 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //            default:
 //                return super.onOptionsItemSelected(item);
 //        }
-//    }
+//    }//endregion
 
     //region IMPLEMENTED SHERLOCK METHODS (possible refactoring https://github.com/codepath/android_guides/wiki/ActionBar-Tabs-with-Fragments )
     @Override
     public void onTabSelected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }
-
     @Override
     public void onTabUnselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }
-
     @Override
     public void onTabReselected(Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
     }//endregion
 
-    //region READING /\ Adding DATA TO ARRAYS
+    //region READING /\ Adding DATA from JSON TO ARRAYS, DB
     // Reads an InputStream and converts it to a String.
     public String readIt(InputStream stream, int len) throws IOException {
         Reader reader = new InputStreamReader(stream, "UTF-8");
@@ -342,26 +343,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
             }
         });
         return data;
-    }
-    //endregion
+    }//endregion
 
-    // TODO DYNAMIC ADDING of OPTIONS / duplicated from FragmentCreate
-    public void addOptions(View view) {
-
-        /* Defining the ArrayAdapter to set items to ListView */
-/*
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-
-        /** Defining a click event listener for the button "Add" *//*
-        EditText edit = (EditText) findViewById(R.id.txtItem);
-        list.add(edit.getText().toString());
-        edit.setText("");
-        adapter.notifyDataSetChanged();
-*/
-    }
-    //endregion
-
-    //region DOWNLOAD WEBPAGE / AsyncTask
+    //region DOWNLOAD TASK w/ AsyncTask
     // Uses AsyncTask to create a task away from the main UI thread. This task takes a
     // URL string and uses it to create an HttpUrlConnection. Once the connection
     // has been established, the AsyncTask downloads the contents of the webpage as
@@ -381,10 +365,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     }//endregion
 
     //region PLACEHOLDER FRAGMENT
-
-    /**
-     * Contains simple views
-     */
     public static class PlaceholderFragment extends Fragment {
         public PlaceholderFragment() {
         }
@@ -395,11 +375,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
-    }
-//endregion
+    }//endregion
 
     //region HYPERLINKS
-
     /**
      * Sets a hyperlink style to the textView.
      */
@@ -411,7 +389,7 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
     }
 
     /**
-     * Adding Hyperlinks to anykind of textViews
+     * Adding Hyperlinks to any kind of textViews
      * TextView tv = (TextView) findViewById(R.id.aboutLink);
      * Utils.makeTextViewHyperlink(tv);
      * tv.setOnClickListener(new OnClickListener() {
@@ -424,13 +402,11 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
      */
 //endregion
 
-    //region SAVING WIFI PREFERENCES on change and onStop()
+    //region SAVING PREFERENCES on change and onStop()
 
-//    // get a set WiFi Settings
+      // get a set WiFi Settings
 //    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 //    Boolean spWiFiSetting = sharedPref.getBoolean("db_WiFi", false);
-
-
 //    @Override
 //    protected void onStop(){
 //        super.onStop();
@@ -445,23 +421,55 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 //        editor.commit();
 //    }//endregion
 
+    //region LIFE-CYCLE region
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //outState.putSerializable("param", value);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+    //endregion
+
     //region HW BUTTONS
     /*
     @Override
     public void onBackPressed() {
-        Toast.makeText(MainActivity.this, "Haha! :-)", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Pressed BACK", Toast.LENGTH_SHORT).show();
         FrameLayout activityMainLayout = (FrameLayout) findViewById(R.id.container);
         activityMainLayout.removeAllViews();
 
         LayoutInflater inflater = getLayoutInflater();
         activityMainLayout.addView(inflater.inflate(R.layout.activity_main, null));
-//                fragment = new PlaceholderFragment();
-//                fragmentManager = getFragmentManager();
-//                fragmentTransaction = fragmentManager.beginTransaction();
-//                fragmentTransaction.add(R.id.container, fragment);
-//                fragmentTransaction.commit();
+                fragment = new PlaceholderFragment();
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.add(R.id.container, fragment);
+                fragmentTransaction.commit();
 
-//        super.onBackPressed();
+        super.onBackPressed();
         Log.d(LOG, "Pressed Back");
     }*/
     //endregion

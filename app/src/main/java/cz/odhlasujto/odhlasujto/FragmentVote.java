@@ -70,23 +70,19 @@ public class FragmentVote extends SherlockFragment {
 
         dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
         textOPTION.setAdapter(dataAdapter);
-        //Toast.makeText(getActivity(). getApplicationContext(), "COUNT of List ITEMS:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
         Log.v("DUMP CURSOR[getOptions]", DatabaseUtils.dumpCursorToString(cursor));
-        //Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition:  " +textOPTION.getCheckedItemPositions(), Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getActivity().getApplicationContext(), "CheckedItem COUNT:  " +textOPTION.getCheckedItemCount(), Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getActivity().getApplicationContext(), "CheckedItem IDs:  " +textOPTION.getCheckedItemIds(), Toast.LENGTH_SHORT).show();
         //endregion
 
         submitVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(), "txt Option:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity().getApplicationContext(), "COUNT of List ITEMS:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity().getApplicationContext(), "getChecked:  " +textOPTION.getCheckedItemPosition(), Toast.LENGTH_SHORT).show();
-////              FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
-//                Log.d(LOG, "Clicked on Submit Poll: declaration");
+                Toast.makeText(getActivity().getApplicationContext(), "Votes saved:  " +textOPTION.getCount(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "CheckedItem COUNT:  " +textOPTION.getCheckedItemCount(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "CheckedItem IDs:  " +textOPTION.getCheckedItemIds(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), "getCheckedItemPosition:  " +textOPTION.getCheckedItemPositions(), Toast.LENGTH_SHORT).show();
+//                FrameLayout fragmentCreateLayout = (FrameLayout) view.findViewById(android.R.id.content);
 //
-////                fragmentCreateLayout.removeAllViews();
+//                fragmentCreateLayout.removeAllViews();
 //                Log.d(LOG, "Clicked on Submit Poll: remove all views");
 //                fragment = new FragmentResults();
 //                Log.d(LOG, "Clicked on Submit Poll: called fragment VOTE");
@@ -96,8 +92,7 @@ public class FragmentVote extends SherlockFragment {
 //                fragmentTransaction.addToBackStack(null);
 //                fragmentTransaction.commit();
 //                Log.d(LOG, "Clicked on Submit Poll: commited");
-////                View view = inflater.inflate(R.layout.vote, container, false);
-////                Log.d(LOG, "Clicked on Submit POLL Btn");
+//                View view = inflater.inflate(R.layout.vote, container, false);
             }
         });
         db.close();

@@ -4,28 +4,20 @@ import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.json.JSONObject;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import cz.odhlasujto.odhlasujto.Models.Options;
+import cz.odhlasujto.odhlasujto.Models.Poll;
 
 import static java.lang.String.valueOf;
 

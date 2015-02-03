@@ -48,5 +48,6 @@
     <string name="btnDownloadJSON">Download JSON</string>
     <string name="pollResults">Results of the poll</string>
     <string name="btnSQLite">View database</string>
+    <string name="noPoll">No new poll created..</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package cz.odhlasujto.odhlasujto;
+package cz.odhlasujto.odhlasujto.Adapters;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -6,19 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterOptions extends BaseAdapter {
+import cz.odhlasujto.odhlasujto.Models.Poll;
+import cz.odhlasujto.odhlasujto.R;
+
+public class Adapter extends BaseAdapter {
 
     FragmentActivity activity;
     Context context = activity.getApplicationContext();
-    List<Options> data = new ArrayList<Options>();
+    List<Poll> data = new ArrayList<Poll>();
 
-    public AdapterOptions(FragmentActivity activity, List<Options> data) {
+    public Adapter(FragmentActivity activity, List<Poll> data) {
         this.activity = activity;
         this.data = data;
     }
@@ -48,17 +51,19 @@ public class AdapterOptions extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = null;
-        view = inflater.inflate(R.layout.rimmer, null);
+        view = inflater.inflate(R.layout.rimmer_results, null);
 
-        TextView t1 = (TextView) view.findViewById(R.id.name_option);
-        t1.setText(data.get(i).getOptionName());
+        TextView t0 = (TextView) view.findViewById(R.id.name_option);
+        t0.setText(String.valueOf(data.get(i).getPollId()));
 
-        CheckBox cbVote = (CheckBox) view.findViewById(R.id.checkBoxVote);
-        cbVote.setChecked(true);
+        CheckBox cbResults = (CheckBox) view.findViewById(R.id.checkBoxResult);
+        cbResults.setChecked(true);
 //          if (data.get(i).getSUM() == 1)
 //              cbVote.setChecked(true);
 //              else
 //              cbVote.setChecked(false);
+
         return view;
     }
+
 }

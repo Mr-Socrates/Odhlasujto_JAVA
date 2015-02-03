@@ -1,4 +1,4 @@
-package cz.odhlasujto.odhlasujto;
+package cz.odhlasujto.odhlasujto.Models;
 
 public class Options {
     private int optionID;

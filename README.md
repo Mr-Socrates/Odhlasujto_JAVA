@@ -27,3 +27,11 @@ This folder contains list of main used technologies and corresponding steps to g
 
 ### CheckBoxes in ListView
 : http://techlovejump.com/android-listview-with-checkbox/
+
+### Life Cycle - Instance states
+
+onSaveInstanceState (ie HomeBtn pressed): http://www.intertech.com/Blog/saving-and-retrieving-android-instance-state-part-1/
+
+### Publishing app
+
+: https://play.google.com/apps/publish/signup/

@@ -49,22 +49,31 @@ public class SherlockTabListener <T extends SherlockFragment> implements TabList
     }
 
     public void onTabSelected(Tab tab, FragmentTransaction ft) {
+        SherlockFragment preInitializedFragment = (SherlockFragment) mActivity.getSupportFragmentManager().findFragmentByTag(mTag);
+
         // Check if the fragment is already initialized
-        if (mFragment == null) {
+        if (preInitializedFragment == null && preInitializedFragment == null) {
             // If not, instantiate and add it to the activity
             mFragment = (SherlockFragment) SherlockFragment
                     .instantiate(mActivity, mClass.getName(), mfragmentArgs);
             ft.add(mfragmentContainerId, mFragment, mTag);
-        } else {
+        } else if  (mFragment != null) {
             // If it exists, simply attach it in order to show it
             ft.attach(mFragment);
+        } else if (preInitializedFragment != null) {
+            ft.attach(preInitializedFragment);
+            mFragment = preInitializedFragment;
         }
     }
 
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        if (mFragment != null) {
-            // Detach the fragment, because another one is being attached
-            ft.detach(mFragment);
+        SherlockFragment preInitializedFragment = (SherlockFragment) mActivity.getSupportFragmentManager().findFragmentByTag(mTag);
+
+        if (preInitializedFragment != null) {
+            ft.detach(preInitializedFragment);
+            } else if (mFragment != null) {
+                // Detach the fragment, because another one is being attached
+                ft.detach(mFragment);
         }
     }
 

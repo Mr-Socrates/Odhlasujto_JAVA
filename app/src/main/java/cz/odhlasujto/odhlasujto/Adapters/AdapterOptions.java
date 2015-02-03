@@ -1,4 +1,4 @@
-package cz.odhlasujto.odhlasujto;
+package cz.odhlasujto.odhlasujto.Adapters;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -6,23 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.CheckBox;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
-public class Adapter extends BaseAdapter {
+import cz.odhlasujto.odhlasujto.Models.Options;
+import cz.odhlasujto.odhlasujto.R;
+
+public class AdapterOptions extends BaseAdapter {
 
     FragmentActivity activity;
     Context context = activity.getApplicationContext();
-    List<Poll> data = new ArrayList<Poll>();
+    List<Options> data = new ArrayList<Options>();
 
-    public Adapter(FragmentActivity activity, List<Poll> data) {
+    public AdapterOptions(FragmentActivity activity, List<Options> data) {
         this.activity = activity;
         this.data = data;
     }
@@ -52,19 +51,17 @@ public class Adapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = null;
-        view = inflater.inflate(R.layout.rimmer_results, null);
+        view = inflater.inflate(R.layout.rimmer, null);
 
-        TextView t0 = (TextView) view.findViewById(R.id.name_option);
-        t0.setText(String.valueOf(data.get(i).getPollId()));
+        TextView t1 = (TextView) view.findViewById(R.id.name_option);
+        t1.setText(data.get(i).getOptionName());
 
-        CheckBox cbResults = (CheckBox) view.findViewById(R.id.checkBoxResult);
-        cbResults.setChecked(true);
+        CheckBox cbVote = (CheckBox) view.findViewById(R.id.checkBoxVote);
+        cbVote.setChecked(true);
 //          if (data.get(i).getSUM() == 1)
 //              cbVote.setChecked(true);
 //              else
 //              cbVote.setChecked(false);
-
         return view;
     }
-
 }

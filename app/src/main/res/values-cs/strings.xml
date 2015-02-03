@@ -34,7 +34,7 @@
     <string name="optionFlatus">Option 1</string>
     <string name="btnDownloadJSON">Download JSON</string>
     <string name="loading">Načítání</string>
-    <string name="basicInformation">Základní informace</string>
+    <string name="basicInformation">Základní informace nového hlasování</string>
     <string name="options">Možnosti hlasování</string>
     <string name="emptyOptionName">Bez názvu</string>
     <string name="chyba">Chyba!</string>
@@ -48,4 +48,5 @@
     <string name="oznameni2">Zařízení není online!</string>
     <string name="pollResults">Výsledky hlasování</string>
     <string name="btnSQLite">Prohlédni si databázi</string>
+    <string name="noPoll">Není žádné nové hlasování..</string>
 </resources>
