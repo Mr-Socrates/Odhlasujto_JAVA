@@ -164,9 +164,9 @@ public class FragmentCreate extends SherlockFragment {
         return view;
     }
 
-    //region přidání položek do DB / refactor!
+    //region přidání položek do DB / refactor
     public void insertPoll(Poll paraPoll) {
         db newDB = new db(getActivity().getApplicationContext());
         SQLiteDatabase sqliteDatabase = newDB.getWritableDatabase();
-    } //endregion
+    } //endregioN
 }

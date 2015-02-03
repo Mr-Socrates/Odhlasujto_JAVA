@@ -71,7 +71,6 @@ public class FragmentVote extends SherlockFragment {
         dataAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(), R.layout.rimmer, cursor, from, to, 0);
         textOPTION.setAdapter(dataAdapter);
         Log.v("DUMP CURSOR[getOptions]", DatabaseUtils.dumpCursorToString(cursor));
-        //endregion
 
         submitVote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +93,8 @@ public class FragmentVote extends SherlockFragment {
 //                Log.d(LOG, "Clicked on Submit Poll: commited");
 //                View view = inflater.inflate(R.layout.vote, container, false);
             }
-        });
+        });//endregion
+
         db.close();
         return view;
     }

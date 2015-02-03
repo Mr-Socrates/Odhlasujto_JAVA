@@ -59,9 +59,6 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
 
     private static final String LOG = MainActivity.class.getSimpleName(); //for printing out LOGs
     public static final String PREFS_NAME = "MyPrefsFile";
-    SherlockFragment fragment;
-    android.support.v4.app.FragmentManager fragmentManager;
-    android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     private final Handler handler = new Handler();
     ActionBar.Tab TabCreate, TabVote, TabResults;
@@ -106,19 +103,9 @@ public class MainActivity extends SherlockFragmentActivity implements TabListene
                     .commit();
         }//endregion
 
-        db db = new db(this);
         //VYMAZÁNÍ DB pro zkoušku ON DELETE CASCADE
+        db db = new db(this);
         //db.getWritableDatabase().delete("polls", null, null);
-
-        Button btnDownload = (Button) findViewById(R.id.btnDownload);
-        /*btnDownload.setOnClickListener (new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, getString(R.string.loading), Toast.LENGTH_SHORT).show();
-                Log.d(LOG, "Clicked on CreatePoll Btn - after");
-           //     new DownloadWebpageTask().execute(URL);
-            }
-        });*/
 
         //region ACTION BAR
         final ActionBar actionBar = getSupportActionBar();
