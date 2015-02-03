@@ -49,7 +49,7 @@ public class FragmentCreate extends SherlockFragment {
 
         // Instanciace ArrayListu & deklarace ArrayAdapteru
         final ArrayList<String> list = new ArrayList<String>();
-        ArrayAdapter<String> adapter;
+        final ArrayAdapter<String> adapter;
 
         newPollArrayL = new ArrayList<Poll>();
         newOptionArrayL = new ArrayList<Options>();
@@ -98,7 +98,7 @@ public class FragmentCreate extends SherlockFragment {
 
                     Toast.makeText(getActivity().getApplicationContext(), "Option:  " + ziskaneOptionName + " created.", Toast.LENGTH_SHORT).show();
                     option.setText("");
-                    //adapter.notifyDataSetChanged()
+                    //TODO adapter.notifyDataSetChanged(); STILL NOT WORKING
                 }
             }
         });
@@ -154,8 +154,8 @@ public class FragmentCreate extends SherlockFragment {
 //                fragmentTransaction.addToBackStack(null);
 //                fragmentTransaction.commit();
                     //endregion
-
                     newOptionArrayL.clear();
+                    list.clear();
                 }
                 pollDesc.setText("");
                 pollName.setText("");
