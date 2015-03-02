@@ -156,9 +156,9 @@ public class FragmentCreate extends SherlockFragment {
                     //endregion
                     newOptionArrayL.clear();
                     list.clear();
+                    pollDesc.setText("");
+                    pollName.setText("");
                 }
-                pollDesc.setText("");
-                pollName.setText("");
             }
         });//endregion
         return view;

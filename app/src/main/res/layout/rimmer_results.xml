@@ -27,6 +27,8 @@
         android:layout_alignRight="@+id/name_option"
         android:layout_alignEnd="@+id/name_option"
         android:nestedScrollingEnabled="false"
-        android:paddingRight="21dp" />
+        android:paddingRight="21dp"
+        android:clickable="false"
+        android:enabled="false" />
 
 </RelativeLayout>

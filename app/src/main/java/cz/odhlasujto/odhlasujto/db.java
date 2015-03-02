@@ -119,7 +119,7 @@ public class db extends SQLiteOpenHelper {
         List<Poll> polls = new LinkedList<Poll>();
 
         // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_POLLS;
+        String query = "SELECT * FROM " + TABLE_POLLS;
 
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -206,7 +206,7 @@ values.put(SUM, option.getSUM());
     public Cursor getOptions() {
         Cursor optionNamefromDB = null;
         SQLiteDatabase db = this.getReadableDatabase();
-String selectQuery = "SELECT _id, optionName, sum FROM polls, options WHERE polls.pollId = options.createdPoll";
+String selectQuery = "SELECT _id, optionName, sum FROM options WHERE options.createdPoll = (SELECT MAX(pollId) FROM polls)";
         //String selectQuery = "SELECT " + COL_NAME_POLL + " FROM " + TABLE_POLLS;
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor != null && cursor.getCount() > 0) {
